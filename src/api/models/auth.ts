@@ -1,4 +1,3 @@
-export interface IAuthBody {
-  username: string
-  password: string
-}
+import { IHookFormValues } from 'types/forms/hook-form'
+
+export type TAuthBody = Pick<IHookFormValues, 'username' | 'password'>

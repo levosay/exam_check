@@ -1,7 +1,7 @@
 import instance from 'api'
-import { IAuthBody } from 'api/models'
+import { TAuthBody } from 'api/models'
 
-export const postSignup = async (body: IAuthBody) => {
+export const postSignup = async (body: TAuthBody) => {
   const { data } = await instance.post('/signup', body)
 
   return data
