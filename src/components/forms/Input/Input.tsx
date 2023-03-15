@@ -10,15 +10,21 @@ export const Input: FunctionComponent<IInputProps> = ({
 }): JSX.Element => {
   const { register } = useFormContext<IHookFormValues>()
 
-
   return (
     <div className={'flex flex-col'}>
       {labelMessage &&
-        <label htmlFor={hookFormProps.inputFormName}>
+        <label
+          htmlFor={hookFormProps.inputFormName}
+          className={'text-gray mb-1'}
+        >
           {labelMessage}
         </label>
       }
-      <input {...register(hookFormProps.inputFormName)} {...props} />
+      <input
+        className={''}
+        {...register(hookFormProps.inputFormName)}
+        {...props}
+      />
     </div>
   )
 }

@@ -13,7 +13,10 @@ export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className={'flex flex-col gap-2'}
+      >
         {children}
       </form>
     </FormProvider>

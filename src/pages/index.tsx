@@ -7,13 +7,13 @@ const Home: NextPage = () => {
     console.log('data_+_++___ ', data)
   }
   return (
-    <div>
+    <div className={'max-w-3xl'}>
       <Form onSubmit={submit}>
         <Form.Input
           hookFormProps={{
             inputFormName: 'username'
           }}
-          labelMessage={'сюда имя'}
+          labelMessage={'say my name'}
         />
 
         <Form.Input
