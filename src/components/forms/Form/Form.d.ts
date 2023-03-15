@@ -5,6 +5,8 @@ import { Radio } from '../Radio'
 import { ErrorField } from '../ErrorField'
 
 export interface IFormProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema?: any
   onSubmit: (data: IHookFormValues) => void
 }
 

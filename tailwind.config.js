@@ -12,12 +12,14 @@ module.exports = {
     },
     colors: {
       'main-dark': '#0f172a',
+      'main-light': '#1e293b',
       'white': '#E2E8F0',
       'gray': '#CBD5E1',
       'gray-light': '#CBD5E1',
       'prim': '#38BDF8',
       'prim-light': '#7DD3FC',
-      'second-prime': '#F472B6'
+      'second-prime': '#be0e69',
+      'second-prime-light': '#F472B6'
     },
     fontFamily: {
       sans: ['MavenPro', 'sans-serif']

@@ -5,11 +5,15 @@ import { Input } from '../Input'
 import { Checkbox } from '../Checkbox'
 import { Radio } from '../Radio'
 import { ErrorField } from '../ErrorField'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { IHookFormValues } from 'types/forms/hook-form'
 
 
 export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
-  & FormExtensions = ({ children, onSubmit }): JSX.Element => {
-  const methods = useForm()
+  & FormExtensions = ({ children, onSubmit, schema }): JSX.Element => {
+  const methods = useForm<IHookFormValues>({
+    resolver: schema && yupResolver(schema)
+  })
 
   return (
     <FormProvider {...methods}>

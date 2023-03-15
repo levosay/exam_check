@@ -1,3 +1,3 @@
-export interface IErrorFieldProps {
-  message?: string
-}
+import { IHookFormProps } from 'types/forms'
+
+export type TErrorFieldProps = IHookFormProps
