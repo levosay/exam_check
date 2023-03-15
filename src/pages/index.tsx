@@ -4,7 +4,7 @@ import { IHookFormValues } from 'types/forms/hook-form'
 
 import * as Yup from 'yup'
 
-const SigninSchema = Yup.object().shape({
+const schema = Yup.object().shape({
   username: Yup.string()
     .min(2, 'Логин не может быть менее 3 символов')
     .max(12, 'Логин не может быть длиннее 12 символов')
@@ -17,11 +17,11 @@ const SigninSchema = Yup.object().shape({
 
 const Home: NextPage = () => {
   const submit = (data: IHookFormValues) => {
-    console.log('data_+_++___ ', data)
+    // console.log('data_+_++___ ', data)
   }
   return (
     <div className="max-w-3xl">
-      <Form onSubmit={submit} schema={SigninSchema}>
+      <Form onSubmit={submit} schema={schema}>
         <Form.Input
           hookFormProps={{
             inputFormName: 'username'
