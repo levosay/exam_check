@@ -6,7 +6,7 @@ import { IHookFormValues } from 'types/forms'
 import { useAuthUser } from 'hooks'
 
 export const SigninModule: FunctionComponent<ISigninModuleProps> = (): JSX.Element => {
-  const { signinWithCookies } = useAuthUser()
+  const { signinWithCookies, mesReq } = useAuthUser()
 
   const submit = (data: IHookFormValues) => {
     signinWithCookies(data)
@@ -15,6 +15,13 @@ export const SigninModule: FunctionComponent<ISigninModuleProps> = (): JSX.Eleme
   return (
     <Container>
       <div className="max-w-sm mt-32 mx-auto">
+        <h1 className="mx-auto max-w-max mb-1 text-3xl">Авторизация</h1>
+        {mesReq.error &&
+          <p
+            className="w-full mb-1 text-center border-b text-second-prime-light"
+          >
+            {mesReq.error}
+          </p>}
         <Form onSubmit={submit} schema={schema}>
           <Form.Input
             hookFormProps={{

@@ -6,7 +6,7 @@ import { IHookFormValues } from 'types/forms'
 import { useAuthUser } from 'hooks'
 
 export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Element => {
-  const { signupWithRoute } = useAuthUser()
+  const { signupWithRoute, mesReq } = useAuthUser()
 
   const submit = (data: IHookFormValues) => {
     signupWithRoute(data)
@@ -15,6 +15,13 @@ export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Eleme
   return (
     <Container>
       <div className="max-w-sm mt-32 mx-auto">
+        <h1 className="mx-auto max-w-max mb-1 text-3xl">Регистрация</h1>
+        {mesReq.error &&
+          <p
+            className="w-full mb-1 text-center border-b text-second-prime-light"
+          >
+            {mesReq.error}
+          </p>}
         <Form onSubmit={submit} schema={schema}>
           <Form.Input
             hookFormProps={{
