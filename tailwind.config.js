@@ -8,6 +8,9 @@ module.exports = {
         '2': '16px',
         '3': '24px',
         '4': '48px'
+      },
+      maxWidth: {
+        '1520': '1520px'
       }
     },
     colors: {

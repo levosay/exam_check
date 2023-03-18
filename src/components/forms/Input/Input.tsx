@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 import { IInputProps } from './Input.d'
 import { useFormContext } from 'react-hook-form'
-import { IHookFormValues } from 'types/forms/hook-form'
-import { ErrorField } from '@/src/components/forms/ErrorField'
+import { IHookFormValues } from 'types/forms'
+import { ErrorField } from '../ErrorField'
 import clsx from 'clsx'
 import {
   defaultClass,
