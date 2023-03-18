@@ -12,7 +12,13 @@ export const ErrorField: FunctionComponent<TErrorFieldProps> = ({
     <ErrorMessage
       errors={errors}
       name={inputFormName}
-      render={({ message }) => <p>{message}</p>}
+      render={({ message }) => (
+        <span
+          className="w-full mt-1 text-center border-b text-second-prime-light"
+        >
+          {message}
+        </span>
+      )}
     />
   )
 }

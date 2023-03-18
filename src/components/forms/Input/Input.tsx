@@ -4,11 +4,6 @@ import { useFormContext } from 'react-hook-form'
 import { IHookFormValues } from 'types/forms'
 import { ErrorField } from '../ErrorField'
 import clsx from 'clsx'
-import {
-  defaultClass,
-  errorClass,
-  inputClass
-} from './classes'
 
 export const Input: FunctionComponent<IInputProps> = ({
   hookFormProps,
@@ -22,20 +17,20 @@ export const Input: FunctionComponent<IInputProps> = ({
     <div className="flex flex-col">
       {labelMessage &&
         <label
-          className="mb-1 text-prim"
+          className="mb-2 text-prim"
           htmlFor={hookFormProps.inputFormName}
         >
           {labelMessage}
         </label>
       }
-      <ErrorField inputFormName={hookFormProps.inputFormName} />
       <input
-        className={clsx(inputClass, defaultClass, {
-          [errorClass]: fieldIsError,
+        className={clsx('input-default', {
+          'input-error': fieldIsError,
         })}
         {...register(hookFormProps.inputFormName)}
         {...props}
       />
+      <ErrorField inputFormName={hookFormProps.inputFormName} />
     </div>
   )
 }

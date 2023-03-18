@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { ISignupModuleProps } from './SignupModule.d'
-import { Form, Container } from 'components'
+import { Form, Container, Button } from 'components'
 import { schema } from './schema'
 import { IHookFormValues } from 'types/forms'
 import { useAuthUser } from 'hooks'
@@ -14,7 +14,7 @@ export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Eleme
 
   return (
     <Container>
-      <div className="max-w-sm mt-20 mx-auto">
+      <div className="max-w-sm mt-32 mx-auto">
         <Form onSubmit={submit} schema={schema}>
           <Form.Input
             hookFormProps={{
@@ -37,7 +37,7 @@ export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Eleme
             labelMessage={'Повторите пароль'}
             placeholder={'password'}
           />
-          <button>send</button>
+          <Button title={'Отправить'} className="mt-2 ml-auto" />
         </Form>
       </div>
     </Container>

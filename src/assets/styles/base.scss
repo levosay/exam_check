@@ -11,4 +11,26 @@
   p {
     @apply text-gray
   }
+
+  button {
+    @apply flex items-center w-max py-1 px-2 border rounded-2xl anim hover:border-prim hover:bg-main-light
+  }
+
+  input {
+    @apply py-1 px-2 rounded-2xl bg-main-light shadow-sm placeholder-gray border text-sm focus:outline-none focus:ring-1
+  }
+}
+
+@layer components {
+  .anim {
+    transition: 200ms ease-out;
+  }
+
+  .input-default {
+    @apply text-white focus:ring-1
+  }
+
+  .input-error {
+    @apply border-second-prime placeholder-second-prime-light focus:ring-1
+  }
 }
