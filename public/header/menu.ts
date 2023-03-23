@@ -13,5 +13,10 @@ export const menu = [
     id: 3,
     title: 'Авторизация',
     href: '/signin'
+  },
+  {
+    id: 3,
+    title: 'Профиль',
+    href: '/account'
   }
 ]
