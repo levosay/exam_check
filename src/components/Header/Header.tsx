@@ -3,12 +3,14 @@ import { IHeaderProps } from './Header.d'
 import { useAuthUser } from 'hooks'
 import Link from 'next/link'
 import { menu } from '@/public/header'
-import { Button } from 'components'
-import { getCookie } from 'cookies-next'
+import { Button, Loader } from 'components'
+import { useQuery } from '@tanstack/react-query'
+import { IUser } from 'api/models'
+import { getMe } from 'api/endpoints'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
-  const token = getCookie('authToken')
   const { logOut } = useAuthUser()
+  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
 
   const menuList = useMemo(() => (
     menu.map(({ id, title, href }) => (
@@ -16,13 +18,22 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
     ))
   ), [])
 
+  const buttonContent = useMemo(() => {
+    if (isLoading) return <Loader height={'h-2'} weight={'w-2'} />
+    return `${data?.username}`
+  }, [data?.username, isLoading])
+
   return (
     <div className="container mx-auto py-8 mb-5 flex justify-between">
       <h2 className="text-blue-400">Exam Check</h2>
       <div className="flex gap-6">
         {menuList}
       </div>
-      {token && <Button title={'Выйти'} onClick={logOut} />}
+      {<Button
+        className={'h-4 w-100'}
+        title={buttonContent}
+        onClick={logOut}
+      />}
     </div>
   )
 }

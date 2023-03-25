@@ -1,0 +1,11 @@
+{
+  "dest": "public/images",
+  "shape": {
+    "transform": [
+      "svgo"
+    ]
+  },
+  "mode": {
+    "symbol": {}
+  }
+}
