@@ -3,7 +3,7 @@ import { IHeaderProps } from './Header.d'
 import { useAuthUser, useBlackRout } from 'hooks'
 import Link from 'next/link'
 import { menu } from '@/public/header'
-import { Button, Loader } from 'components'
+import { Button, Loader, Icon } from 'components'
 import { useQuery } from '@tanstack/react-query'
 import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
@@ -32,15 +32,18 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
 
   return (
     <div className="container mx-auto py-8 mb-5 flex justify-between">
-      <h2 className="text-blue-400">Exam Check</h2>
+      <div className="flex items-center gap-1">
+        <Icon id={'book-open'} color={'prim-light'} />
+        <h2 className="text-prim">Exam Check</h2>
+      </div>
       <div className="flex gap-6">
         {menuList}
       </div>
-      {<Button
+      <Button
         className={'h-4 min-w-100'}
         title={buttonContent}
         onClick={buttonHandler}
-      />}
+      />
     </div>
   )
 }

@@ -5,6 +5,7 @@ export type TColor =
   | 'main-light'
   | 'white'
   | 'gray'
+  | 'prim'
   | 'gray-light'
   | 'prim-light'
   | 'second-prime'

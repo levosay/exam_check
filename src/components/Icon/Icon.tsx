@@ -7,7 +7,7 @@ export const Icon: FunctionComponent<IIconProps> = ({
   width = 'w-3',
   height = 'h-3',
   // color = 'white'
-}): JSX.Element => {
+}): JSX.Element => { // `text-${color}`
   return (
     <svg className={clsx(width, height)}>
       <use xlinkHref={`/images/symbol/svg/sprite.css.svg#${id}`} />
