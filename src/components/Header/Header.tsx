@@ -1,6 +1,6 @@
-import { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent, useCallback, useMemo } from 'react'
 import { IHeaderProps } from './Header.d'
-import { useAuthUser } from 'hooks'
+import { useAuthUser, useBlackRout } from 'hooks'
 import Link from 'next/link'
 import { menu } from '@/public/header'
 import { Button, Loader } from 'components'
@@ -10,6 +10,7 @@ import { getMe } from 'api/endpoints'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { logOut } = useAuthUser()
+  const { toCustomRoute } = useBlackRout()
   const { data, isLoading } = useQuery<IUser>(['user'], getMe)
 
   const menuList = useMemo(() => (
@@ -20,8 +21,14 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
 
   const buttonContent = useMemo(() => {
     if (isLoading) return <Loader height={'h-2'} weight={'w-2'} />
-    return `${data?.username}`
+    if (data?.username) return data?.username
+    return 'Войти'
   }, [data?.username, isLoading])
+
+  const buttonHandler = useCallback(() => {
+    if (data?.username && !isLoading) return logOut
+    return toCustomRoute('/signin')
+  }, [data?.username])
 
   return (
     <div className="container mx-auto py-8 mb-5 flex justify-between">
@@ -32,7 +39,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
       {<Button
         className={'h-4 min-w-100'}
         title={buttonContent}
-        onClick={logOut}
+        onClick={buttonHandler}
       />}
     </div>
   )
