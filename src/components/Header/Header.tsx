@@ -30,7 +30,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
         {menuList}
       </div>
       {<Button
-        className={'h-4 w-100'}
+        className={'h-4 min-w-100'}
         title={buttonContent}
         onClick={logOut}
       />}
