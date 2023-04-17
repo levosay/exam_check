@@ -30,6 +30,10 @@
     @apply text-white focus:ring-1
   }
 
+  .input-checkbox-default {
+    @apply w-2 h-2 cursor-pointer
+  }
+
   .input-error {
     @apply border-second-prime placeholder-second-prime-light focus:ring-1
   }

@@ -1,11 +1,8 @@
 import { NextPage } from 'next'
+import { HomeModule } from 'modules'
 
 const Home: NextPage = () => {
-  return (
-    <div className="max-w-3xl">
-      MAIN
-    </div>
-  )
+  return <HomeModule />
 }
 
 export default Home
