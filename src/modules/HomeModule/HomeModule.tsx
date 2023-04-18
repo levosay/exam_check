@@ -15,12 +15,14 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     console.log('data ', data)
   }
 
-  const questionsJSX = questions.map(({ id, type, ...props }) => {
-    switch (type) {
+  // TODO в правой части экрана стики блок с прогрессом ****
+
+  const questionsJSX = questions.map((item) => {
+    switch (item.type) {
       case QuestionTypes.checkbox:
-        return <QuestionsChoose key={id} {...props} />
+        return <QuestionsChoose key={item.id} {...item} />
       case QuestionTypes.text:
-        return <QuestionsText key={id} {...props} />
+        return <QuestionsText key={item.id} {...item} />
     }
   })
 

@@ -2,49 +2,49 @@ import { IQuestions, QuestionTypes } from '@/src/api/models/questions'
 
 export const questions: IQuestions[] = [
   {
-    id: 0,
+    id: 2380,
     type: QuestionTypes.checkbox,
     question: 'В каком году было крещение Руси?',
     answers: [
       {
-        id: 0,
+        id: 123124,
         title: '1994',
       },
       {
-        id: 1,
+        id: 124124514,
         title: '2077',
       },
       {
-        id: 2,
+        id: 1231,
         title: '1812',
       },
       {
-        id: 3,
+        id: 332,
         title: '2023',
       },
     ]
   },
   {
-    id: 0,
+    id: 853,
     type: QuestionTypes.checkbox,
     question: 'Еще какой-то вопрос',
     answers: [
       {
-        id: 0,
+        id: 25463,
         title: '11',
       },
       {
-        id: 1,
+        id: 243524,
         title: '222',
       },
       {
-        id: 2,
+        id: 5645,
         title: '333',
       }
     ]
   },
   {
-    id: 0,
+    id: 205434,
     type: QuestionTypes.text,
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
   }
