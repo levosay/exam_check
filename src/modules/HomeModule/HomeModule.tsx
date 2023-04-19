@@ -5,7 +5,8 @@ import {
   Button,
   Container,
   QuestionsChoose,
-  QuestionsText
+  QuestionsText,
+  ProgressExam
 } from 'components'
 import { questions } from '@/public/mock/questions'
 import { QuestionTypes } from 'api/models/questions'
@@ -15,7 +16,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     console.log('data ', data)
   }
 
-  // TODO в правой части экрана стики блок с прогрессом ****
+  // TODO в правой части экрана стики блок с прогрессом **** тут же было бы прикольно добавить секундомер прохождения теста
 
   const questionsJSX = questions.map((item) => {
     switch (item.type) {
@@ -30,7 +31,12 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     <Container>
       <div className={''}>
         <Form onSubmit={submit}>
-          {questionsJSX}
+          <div className={'flex gap-7'}>
+            <div className={'w-2/4'}>
+              {questionsJSX}
+            </div>
+            <ProgressExam />
+          </div>
           <Button title={'Отправить'} />
         </Form>
       </div>
