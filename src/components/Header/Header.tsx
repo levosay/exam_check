@@ -14,8 +14,8 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { data, isLoading } = useQuery<IUser>(['user'], getMe)
 
   const menuList = useMemo(() => (
-    menu.map(({ id, title, href }) => (
-      <Link key={id} href={href}>{title}</Link>
+    menu.map(({ title, href }) => (
+      <Link key={href} href={href}>{title}</Link>
     ))
   ), [])
 

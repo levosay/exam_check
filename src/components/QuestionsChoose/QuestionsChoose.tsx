@@ -10,7 +10,7 @@ export const QuestionsChoose: FunctionComponent<
 }): JSX.Element => {
   const answersJSX = answers.map(({ id, title }) => (
     <Form.Checkbox
-      key={id}
+      key={id + title}
       labelMessage={title}
       hookFormProps={{
         inputFormName: `question_check_${id}`

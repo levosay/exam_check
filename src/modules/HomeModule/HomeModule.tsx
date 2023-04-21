@@ -16,9 +16,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     console.log('data ', data)
   }
 
-  // TODO в правой части экрана стики блок с прогрессом **** тут же было бы прикольно добавить секундомер прохождения теста
-
-  const questionsJSX = questions.map((item) => {
+  const questionsJSX = [...questions, ...questions, ...questions].map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
         return <QuestionsChoose key={item.id} {...item} />
@@ -31,8 +29,8 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     <Container>
       <div className={''}>
         <Form onSubmit={submit}>
-          <div className={'flex gap-7'}>
-            <div className={'w-2/4'}>
+          <div className={'flex items-start gap-7'}>
+            <div className={'flex flex-col gap-5 w-3/4'}>
               {questionsJSX}
             </div>
             <ProgressExam />
