@@ -6,7 +6,7 @@ import {
   Container,
   QuestionsChoose,
   QuestionsText,
-  ProgressExam
+  ProgressExam, QuestionsSequence
 } from 'components'
 import { questions } from '@/public/mock/questions'
 import { QuestionTypes } from 'api/models/questions'
@@ -21,12 +21,14 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     console.log('data ', data)
   }
 
-  const questionsJSX = [...questions, ...questions, ...questions].map((item) => {
+  const questionsJSX = questions.map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
         return <QuestionsChoose key={item.id} {...item} />
       case QuestionTypes.text:
         return <QuestionsText key={item.id} {...item} />
+      case QuestionTypes.sequence:
+        return <QuestionsSequence key={item.id} {...item} />
     }
   })
 
