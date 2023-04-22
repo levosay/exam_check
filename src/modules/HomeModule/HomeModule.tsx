@@ -21,7 +21,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
     console.log('data ', data)
   }
 
-  const questionsJSX = questions.map((item) => {
+  const questionsJSX = [...questions, ...questions, ...questions].map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
         return <QuestionsChoose key={item.id} {...item} />
