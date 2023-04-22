@@ -10,8 +10,13 @@ import {
 } from 'components'
 import { questions } from '@/public/mock/questions'
 import { QuestionTypes } from 'api/models/questions'
+import { useQuery } from '@tanstack/react-query'
+import { IUser } from 'api/models'
+import { getMe } from 'api/endpoints'
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
+  useQuery<IUser>(['user'], getMe)
+
   const submit = (data) => {
     console.log('data ', data)
   }
