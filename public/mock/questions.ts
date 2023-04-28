@@ -47,5 +47,11 @@ export const questions: IQuestions[] = [
     id: 10,
     type: QuestionTypes.text,
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
+  },
+  {
+    id: 10,
+    type: QuestionTypes.sequence,
+    question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
+    answers: ['1. это', '2. оно?', '3. или это?']
   }
 ]

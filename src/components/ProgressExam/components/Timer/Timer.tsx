@@ -34,9 +34,5 @@ export const Timer: FunctionComponent<
     }
   }, [])
 
-  return (
-    <div className={'flex gap-2'}>
-      <span>{time.hours}:{minText}:{secText}</span>
-    </div>
-  )
+  return <span>{time.hours}:{minText}:{secText}</span>
 }
