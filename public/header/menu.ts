@@ -6,13 +6,8 @@ export const menu = [
   },
   {
     id: 2,
-    title: 'Регистрация',
-    href: '/signup'
-  },
-  {
-    id: 3,
-    title: 'Авторизация',
-    href: '/signin'
+    title: 'История',
+    href: '/history'
   },
   {
     id: 3,

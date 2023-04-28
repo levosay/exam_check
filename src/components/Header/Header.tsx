@@ -26,7 +26,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
 
   const buttonHandler = useCallback(() => {
     if (data?.username) toCustomRoute('/account')
-    if (data?.username && isLoading) toCustomRoute('/signin')
+    if (!data?.username && !isLoading) toCustomRoute('/signin')
   }, [data?.username, isLoading])
 
   return (
