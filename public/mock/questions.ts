@@ -1,4 +1,4 @@
-import { IQuestions, QuestionTypes } from '@/src/api/models/questions'
+import { IQuestions, QuestionTypes } from 'api/models/questions'
 
 export const questions: IQuestions[] = [
   {
@@ -49,7 +49,7 @@ export const questions: IQuestions[] = [
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
   },
   {
-    id: 10,
+    id: 11,
     type: QuestionTypes.sequence,
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
     answers: ['1. это', '2. оно?', '3. или это?']

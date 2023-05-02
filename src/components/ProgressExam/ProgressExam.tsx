@@ -8,7 +8,7 @@ export const ProgressExam: FunctionComponent<
   return (
     <div className={'sticky top-8 w-1/4 flex flex-col gap-5'}>
       <div className={'flex justify-around'}>
-        <span className={''}>3 / 30</span>
+        <span className={''}>{current} / {total}</span>
         <Timer />
       </div>
       <div className={'w-full bg-gray rounded-full'}>

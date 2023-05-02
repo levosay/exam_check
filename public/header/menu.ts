@@ -7,7 +7,7 @@ export const menu = [
   {
     id: 2,
     title: 'История',
-    href: '/history'
+    href: '/test/history'
   },
   {
     id: 3,

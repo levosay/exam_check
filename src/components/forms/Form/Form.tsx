@@ -1,12 +1,12 @@
 import { FunctionComponent, PropsWithChildren } from 'react'
-import { IFormProps, FormExtensions } from './Form.d'
-import { useForm, FormProvider } from 'react-hook-form'
+import { FormExtensions, IFormProps } from './Form.d'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Input } from '../Input'
 import { Checkbox } from '../Checkbox'
 import { Radio } from '../Radio'
 import { ErrorField } from '../ErrorField'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { IHookFormValues } from 'types/forms/hook-form'
+import { IHookFormValues } from 'types/forms'
 
 export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
   & FormExtensions = ({ children, onSubmit, schema }): JSX.Element => {

@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
-import { IHistoryModuleProps } from './HistoryModule.d'
-import { questions } from '@/public/mock/questions'
+import { ITestModuleProps } from './TestModule.d'
 import { QuestionTypes } from 'api/models/questions'
 import {
   Button,
@@ -12,9 +11,9 @@ import {
   QuestionsText
 } from 'components'
 
-export const HistoryModule: FunctionComponent<
-  IHistoryModuleProps
-> = (): JSX.Element => {
+export const TestModule: FunctionComponent<
+  ITestModuleProps
+> = ({ questions }): JSX.Element => {
   const questionsJSX = [...questions].map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
@@ -38,7 +37,7 @@ export const HistoryModule: FunctionComponent<
             <div className={'flex flex-col gap-5 w-3/4'}>
               {questionsJSX}
             </div>
-            <ProgressExam />
+            <ProgressExam current={0} total={4} />
           </div>
           <Button title={'Отправить'} />
         </Form>

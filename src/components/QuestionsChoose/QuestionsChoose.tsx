@@ -5,15 +5,16 @@ import { Form } from 'components'
 export const QuestionsChoose: FunctionComponent<
   TQuestionsChooseProps
 > = ({
+  id,
   question,
   answers
 }): JSX.Element => {
-  const answersJSX = answers.map(({ id, title }) => (
+  const answersJSX = answers.map(({ id: idAnswer, title }) => (
     <Form.Checkbox
       key={id + title}
       labelMessage={title}
       hookFormProps={{
-        inputFormName: `question_check_${id}`
+        inputFormName: `question_${id}_${idAnswer}`
       }}
     />
   ))

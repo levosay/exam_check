@@ -9,4 +9,5 @@ export interface IHookFormProps {
 export interface IBaseInputProps {
   labelMessage?: string
   hookFormProps: IHookFormProps
+  setProgress?: (name: string) => void
 }
