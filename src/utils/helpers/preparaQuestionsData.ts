@@ -28,26 +28,29 @@ const getQuestionsType = (string: string) => {
 }
 
 const createQuestionsCheck = ({ obj, key, value }: IQuestionsCheckProps) => {
-  obj[getQuestionsId(key)] = {}
-  obj[getQuestionsId(key)].id = getQuestionsId(key)
-  obj[getQuestionsId(key)].type = getQuestionsType(key)
-  obj[getQuestionsId(key)].answers = [{
+  const fieldName = getQuestionsId(key)
+  obj[fieldName] = {}
+  obj[fieldName].id = fieldName
+  obj[fieldName].type = getQuestionsType(key)
+  obj[fieldName].answers = [{
     id: getAnswerId(key), value: value
   }]
 }
 
 const updateQuestionsCheck = ({ obj, key, value }: IQuestionsCheckProps) => {
-  obj[getQuestionsId(key)].answers = [...obj[getQuestionsId(key)].answers, {
+  const fieldName = getQuestionsId(key)
+  obj[fieldName].answers = [...obj[fieldName].answers, {
     id: getAnswerId(key), value: value
   }]
 }
 
 const createQuestionsText = ({ obj, key, value }: IQuestionsTextProps) => {
-  obj[getQuestionsId(key)] = {}
-  obj[getQuestionsId(key)].id = getQuestionsId(key)
-  obj[getQuestionsId(key)].type = getQuestionsType(key)
-  obj[getQuestionsId(key)].answers = [{
-    id: getQuestionsId(key),
+  const fieldName = getQuestionsId(key)
+  obj[fieldName] = {}
+  obj[fieldName].id = fieldName
+  obj[fieldName].type = getQuestionsType(key)
+  obj[fieldName].answers = [{
+    id: fieldName,
     value: value
   }]
 }
