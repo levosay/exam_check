@@ -11,7 +11,7 @@ import {
   QuestionsText
 } from 'components'
 import { IHookFormValues, } from 'types/forms'
-import { prepareQuestionsData } from 'utils/helpers/preparaQuestionsData'
+import { prepareQuestionsData } from 'utils/helpers'
 
 export const TestModule: FunctionComponent<
   ITestModuleProps
