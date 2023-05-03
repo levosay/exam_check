@@ -31,10 +31,10 @@ export const TestModule: FunctionComponent<
     }
   })
 
-  const regQuestionsId = new RegExp(/_[a-z|0-9]*_/g)
-  const regAnswerId = new RegExp(/_[0-9]$/gm)
-  const regTypeCheck = new RegExp(/^questionCheck/g)
-  const regTypeText = new RegExp(/^questionText/g)
+  const regQuestionsId = new RegExp(/_[a-z|0-9]*_/)
+  const regAnswerId = new RegExp(/_[0-9]$/)
+  const regTypeCheck = new RegExp(/^questionCheck/)
+  const regTypeText = new RegExp(/^questionText/)
 
   const getQuestionsId = (string: string) => {
     return string.match(regQuestionsId)?.shift()?.replace(/^_/g, '')
@@ -74,7 +74,7 @@ export const TestModule: FunctionComponent<
     obj[getQuestionsId(key)].id = getQuestionsId(key)
     obj[getQuestionsId(key)].type = getQuestionsType(key)
     obj[getQuestionsId(key)].answers = [{
-      id: '0',
+      id: getQuestionsId(key),
       value: value
     }]
   }
@@ -84,8 +84,8 @@ export const TestModule: FunctionComponent<
 
     for (const key in data) {
       const validKey = key as keyof IHookFormValues
-
       if (matchQuestionsTypeCheck(key)) {
+
         if (obj[getQuestionsId(key)]) {
           updateQuestionsCheck({ obj, key, value: data[validKey] as boolean })
         } else {
@@ -99,7 +99,6 @@ export const TestModule: FunctionComponent<
     }
 
     console.log('obj_______ ', obj)
-
   }
 
   return (

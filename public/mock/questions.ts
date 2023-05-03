@@ -7,49 +7,49 @@ export const questions: IQuestions[] = [
     question: 'В каком году было крещение Руси?',
     answers: [
       {
-        id: 2,
+        id: 1,
         title: '1994',
       },
       {
-        id: 3,
+        id: 2,
         title: '2077',
       },
       {
-        id: 4,
+        id: 3,
         title: '1812',
       },
       {
-        id: 5,
+        id: 4,
         title: '2023',
       },
     ]
   },
   {
-    id: 6,
+    id: 2,
     type: QuestionTypes.checkbox,
     question: 'Еще какой-то вопрос',
     answers: [
       {
-        id: 7,
+        id: 1,
         title: '11',
       },
       {
-        id: 8,
+        id: 2,
         title: '222',
       },
       {
-        id: 9,
+        id: 3,
         title: '333',
       }
     ]
   },
   {
-    id: 10,
+    id: 3,
     type: QuestionTypes.text,
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
   },
   {
-    id: 11,
+    id: 4,
     type: QuestionTypes.sequence,
     question: 'Тут надо будет что-то написать. Мол это вопрос, Ясно?',
     answers: ['1. это', '2. оно?', '3. или это?']
