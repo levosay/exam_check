@@ -10,7 +10,7 @@ export const QuestionsText: FunctionComponent<
       <h3 className={'text-2xl mb-2'}>{question}</h3>
       <Form.Input
         hookFormProps={{
-          inputFormName: `question_text_${id}`
+          inputFormName: `questionText_${id}_`
         }}
         placeholder={'Введите ответ'}
       />

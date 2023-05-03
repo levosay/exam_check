@@ -15,7 +15,7 @@ export const QuestionsSequence: FunctionComponent<
       <div className={'flex flex-col gap-1 mb-2'}>{answersJSX}</div>
       <Form.Input
         hookFormProps={{
-          inputFormName: `question_text_${id}`
+          inputFormName: `questionText_${id}_`
         }}
         placeholder={'Введите ответ'}
       />
