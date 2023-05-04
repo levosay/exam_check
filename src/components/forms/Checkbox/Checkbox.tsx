@@ -8,8 +8,6 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
   hookFormProps,
   disabled,
   labelMessage,
-  onChange,
-  setProgress,
   ...props
 }): JSX.Element => {
   const {
@@ -42,12 +40,6 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
         disabled={disabled}
         {...register(hookFormProps.inputFormName)}
         {...props}
-        onChange={(event) => {
-          if (onChange) {
-            if (setProgress) setProgress(hookFormProps.inputFormName)
-            return onChange(event)
-          }
-        }}
       />
     </div>
   )

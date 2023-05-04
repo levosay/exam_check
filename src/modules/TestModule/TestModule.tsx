@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { ITestModuleProps } from './TestModule.d'
 import { QuestionTypes } from 'api/models/questions'
 import {
@@ -11,11 +11,18 @@ import {
   QuestionsText
 } from 'components'
 import { IHookFormValues, } from 'types/forms'
-import { prepareQuestionsData } from 'utils/helpers'
+import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
 
 export const TestModule: FunctionComponent<
   ITestModuleProps
 > = ({ questions }): JSX.Element => {
+  const [questionData, setQuestionData] = useState<IQuestionData>({})
+  const [progress, setProgress] = useState({
+    current: 0,
+    total: questions.length,
+    finish: false
+  })
+
   const questionsJSX = [...questions].map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
@@ -27,22 +34,39 @@ export const TestModule: FunctionComponent<
     }
   })
 
-  const submit = (data: IHookFormValues) => {
-    const body = prepareQuestionsData(data)
-    console.log('obj_______ ', body)
+  const process = (data: IHookFormValues) => {
+    // const body = prepareQuestionsData(data)
+    setProgress(prevState => {
+      const progress = getProgress(data)
+
+      if (progress === prevState.total) {
+        setQuestionData(prepareQuestionsData(data))
+        return { ...prevState, current: getProgress(data), finish: true }
+      }
+
+      return { ...prevState, current: getProgress(data) }
+    })
+  }
+
+  const submit = () => {
+    console.log('questionData ', questionData)
   }
 
   return (
     <Container>
       <div className={''}>
-        <Form onSubmit={submit}>
+        <Form onSubmit={process}>
           <div className={'flex items-start gap-7'}>
             <div className={'flex flex-col gap-5 w-3/4'}>
               {questionsJSX}
             </div>
-            <ProgressExam current={0} total={4} />
+            <div className={'sticky w-1/4 top-8 flex flex-col'}>
+              <ProgressExam current={progress.current} total={progress.total} />
+              {progress.finish &&
+                <Button title={'Отправить'} type={'button'} onClick={submit} />
+              }
+            </div>
           </div>
-          <Button title={'Отправить'} />
         </Form>
       </div>
     </Container>

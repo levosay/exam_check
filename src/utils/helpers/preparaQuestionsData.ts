@@ -1,9 +1,34 @@
-import {
-  IHookFormValues,
-  IQuestionData,
-  IQuestionsCheckProps,
-  IQuestionsTextProps
-} from 'types/forms'
+import { IHookFormValues, } from 'types/forms'
+
+export interface IIQuestionCheckAnswers {
+  id: string
+  value: boolean | string
+}
+
+export interface IQuestionItem {
+  id: string
+  type: string
+  answers: IIQuestionCheckAnswers[]
+}
+
+export interface IQuestionData {
+  [key: string]: IQuestionItem | Record<string, never>
+}
+
+interface ICreateQuestionsDefaultProps {
+  obj: IQuestionData
+  key: string
+}
+
+export interface IQuestionsCheckProps
+  extends ICreateQuestionsDefaultProps {
+  value: boolean
+}
+
+export interface IQuestionsTextProps
+  extends ICreateQuestionsDefaultProps {
+  value: string
+}
 
 const regQuestionsId = new RegExp(/_[a-z|0-9]*_/)
 const regAnswerId = new RegExp(/_[0-9]$/)
@@ -75,5 +100,19 @@ export const prepareQuestionsData = (data: IHookFormValues) => {
   }
 
   return obj
+}
+
+export const getProgress = (data: IHookFormValues) => {
+  const result = new Map()
+
+  for (const key in data) {
+    const validKey = key as keyof IHookFormValues
+    const id = getQuestionsId(key)
+    if (data[validKey] && !result.get(id)) {
+      result.set(id, 'progress')
+    }
+  }
+
+  return result.size
 }
 

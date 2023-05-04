@@ -5,16 +5,20 @@ import { Timer } from './components'
 export const ProgressExam: FunctionComponent<
   IProgressExamProps
 > = ({ current, total }): JSX.Element => {
+  const percent = current * 100 / total
+
   return (
-    <div className={'sticky top-8 w-1/4 flex flex-col gap-5'}>
+    <div className={'flex flex-col gap-5 mb-2'}>
       <div className={'flex justify-around'}>
         <span className={''}>{current} / {total}</span>
         <Timer />
       </div>
-      <div className={'w-full bg-gray rounded-full'}>
+      <div className={'w-full bg-gray rounded-full overflow-hidden'}>
         <div
           className={'bg-prim text-xs font-medium text-white text-center p-0.5 leading-none rounded-full'}
-          style={{ width: '45%' }}> 45%
+          style={{ width: `${percent}%` }}
+        >
+          {percent}
         </div>
       </div>
     </div>

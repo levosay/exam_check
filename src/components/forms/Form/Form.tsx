@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react'
+import { FunctionComponent, PropsWithChildren, useEffect } from 'react'
 import { FormExtensions, IFormProps } from './Form.d'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Input } from '../Input'
@@ -13,6 +13,11 @@ export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
   const methods = useForm<IHookFormValues>({
     resolver: schema && yupResolver(schema)
   })
+
+  useEffect(() => {
+    const subscription = methods.watch(methods.handleSubmit(onSubmit))
+    return () => subscription.unsubscribe()
+  }, [methods.handleSubmit, methods.watch])
 
   return (
     <FormProvider {...methods}>
