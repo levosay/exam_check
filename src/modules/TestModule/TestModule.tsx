@@ -34,8 +34,7 @@ export const TestModule: FunctionComponent<
     }
   })
 
-  const process = (data: IHookFormValues) => {
-    // const body = prepareQuestionsData(data)
+  const submit = (data: IHookFormValues) => {
     setProgress(prevState => {
       const progress = getProgress(data)
 
@@ -44,18 +43,18 @@ export const TestModule: FunctionComponent<
         return { ...prevState, current: getProgress(data), finish: true }
       }
 
-      return { ...prevState, current: getProgress(data) }
+      return { ...prevState, current: getProgress(data), finish: false }
     })
   }
 
-  const submit = () => {
+  const sendQuestion = () => {
     console.log('questionData ', questionData)
   }
 
   return (
     <Container>
       <div className={''}>
-        <Form onSubmit={process}>
+        <Form onSubmit={submit}>
           <div className={'flex items-start gap-7'}>
             <div className={'flex flex-col gap-5 w-3/4'}>
               {questionsJSX}
@@ -63,7 +62,11 @@ export const TestModule: FunctionComponent<
             <div className={'sticky w-1/4 top-8 flex flex-col'}>
               <ProgressExam current={progress.current} total={progress.total} />
               {progress.finish &&
-                <Button title={'Отправить'} type={'button'} onClick={submit} />
+                <Button
+                  title={'Отправить'}
+                  type={'button'}
+                  onClick={sendQuestion}
+                />
               }
             </div>
           </div>

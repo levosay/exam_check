@@ -10,7 +10,7 @@ export const ProgressExam: FunctionComponent<
   return (
     <div className={'flex flex-col gap-5 mb-2'}>
       <div className={'flex justify-around'}>
-        <span className={''}>{current} / {total}</span>
+        <span>{current} / {total}</span>
         <Timer />
       </div>
       <div className={'w-full bg-gray rounded-full overflow-hidden'}>
