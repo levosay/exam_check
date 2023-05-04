@@ -23,7 +23,7 @@ export const TestModule: FunctionComponent<
     finish: false
   })
 
-  const questionsJSX = [...questions].map((item) => {
+  const questionsJSX = questions.map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
         return <QuestionsChoose key={item.id} {...item} />
@@ -63,6 +63,7 @@ export const TestModule: FunctionComponent<
               <ProgressExam current={progress.current} total={progress.total} />
               {progress.finish &&
                 <Button
+                  className={'w-full animate-pulse mt-3'}
                   title={'Отправить'}
                   type={'button'}
                   onClick={sendQuestion}

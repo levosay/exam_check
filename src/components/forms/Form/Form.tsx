@@ -1,6 +1,6 @@
 import { FunctionComponent, PropsWithChildren, useEffect } from 'react'
 import { FormExtensions, IFormProps } from './Form.d'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, UseFormWatch } from 'react-hook-form'
 import { Input } from '../Input'
 import { Checkbox } from '../Checkbox'
 import { Radio } from '../Radio'
@@ -15,7 +15,8 @@ export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
   })
 
   useEffect(() => {
-    const subscription = methods.watch(methods.handleSubmit(onSubmit))
+    const handleSignup = methods.handleSubmit(onSubmit) as UseFormWatch<IHookFormValues>
+    const subscription = methods.watch(handleSignup)
     return () => subscription.unsubscribe()
   }, [methods.handleSubmit, methods.watch])
 

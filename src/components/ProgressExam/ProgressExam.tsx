@@ -8,7 +8,7 @@ export const ProgressExam: FunctionComponent<
   const percent = current * 100 / total
 
   return (
-    <div className={'flex flex-col gap-5 mb-2'}>
+    <div className={'flex flex-col gap-5'}>
       <div className={'flex justify-around'}>
         <span>{current} / {total}</span>
         <Timer />
