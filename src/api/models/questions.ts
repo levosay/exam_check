@@ -4,26 +4,25 @@ export enum QuestionTypes {
   sequence = 'sequence'
 }
 
-export interface IQuestionCheckbox {
+export interface IQuestionDefault {
   _id: number
+  test: number
+  position: number
+}
+
+export interface IQuestionCheckbox extends IQuestionDefault {
   type: QuestionTypes.checkbox
   question: string
   answers: string[]
 }
 
-export interface IQuestionText {
-  _id: number
+export interface IQuestionText extends IQuestionDefault {
   type: QuestionTypes.text
-  test: number
-  position: number
   question: string
 }
 
-export interface IQuestionSequence {
-  _id: number
+export interface IQuestionSequence extends IQuestionDefault {
   type: QuestionTypes.sequence
-  test: number
-  position: number
   question: string
   answers: string[]
 }
