@@ -4,7 +4,7 @@ import { Form } from '@/src/components'
 
 export const QuestionsSequence: FunctionComponent<
   TQuestionsSequenceProps
-> = ({ id, question, answers }): JSX.Element => {
+> = ({ _id, question, answers }): JSX.Element => {
   const answersJSX = answers.map(title => (
     <span key={title}>{title}</span>
   ))
@@ -15,7 +15,7 @@ export const QuestionsSequence: FunctionComponent<
       <div className={'flex flex-col gap-1 mb-2'}>{answersJSX}</div>
       <Form.Input
         hookFormProps={{
-          inputFormName: `questionText_${id}_`
+          inputFormName: `questionText_${_id}_`
         }}
         placeholder={'Введите ответ'}
       />

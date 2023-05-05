@@ -5,7 +5,7 @@ import { Timer } from './components'
 export const ProgressExam: FunctionComponent<
   IProgressExamProps
 > = ({ current, total }): JSX.Element => {
-  const percent = current * 100 / total
+  const percent = Math.floor(current * 100 / total)
 
   return (
     <div className={'flex flex-col gap-5'}>

@@ -26,11 +26,11 @@ export const TestModule: FunctionComponent<
   const questionsJSX = questions.map((item) => {
     switch (item.type) {
       case QuestionTypes.checkbox:
-        return <QuestionsChoose key={item.id} {...item} />
+        return <QuestionsChoose key={item._id} {...item} />
       case QuestionTypes.text:
-        return <QuestionsText key={item.id} {...item} />
+        return <QuestionsText key={item._id} {...item} />
       case QuestionTypes.sequence:
-        return <QuestionsSequence key={item.id} {...item} />
+        return <QuestionsSequence key={item._id} {...item} />
     }
   })
 
