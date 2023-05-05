@@ -2,11 +2,15 @@ import axios from 'axios'
 import { CONFIG } from 'utils/constants'
 import { getCookie } from 'utils/helpers'
 
-const instance = axios.create({
-  baseURL: CONFIG.apiEndpoint
+export const apiAuth = axios.create({
+  baseURL: `${CONFIG.apiEndpoint}/auth`
 })
 
-instance.interceptors.request.use(config => {
+export const apiExam = axios.create({
+  baseURL: `${CONFIG.apiEndpoint}/exam`
+})
+
+apiAuth.interceptors.request.use(config => {
     const token = getCookie('authToken')
 
     if (config.url !== '/signin/' && config.url !== '/signup/' && token) {
@@ -19,5 +23,3 @@ instance.interceptors.request.use(config => {
     return Promise.reject(err)
   }
 )
-
-export default instance

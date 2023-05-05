@@ -6,7 +6,9 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
 
   return (
     <Container>
-      Home
+      <div>
+        История:
+      </div>
     </Container>
   )
 }

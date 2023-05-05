@@ -53,26 +53,24 @@ export const TestModule: FunctionComponent<
 
   return (
     <Container>
-      <div className={''}>
-        <Form onSubmit={submit}>
-          <div className={'flex items-start gap-7'}>
-            <div className={'flex flex-col gap-5 w-3/4'}>
-              {questionsJSX}
-            </div>
-            <div className={'sticky w-1/4 top-8 flex flex-col'}>
-              <ProgressExam current={progress.current} total={progress.total} />
-              {progress.finish &&
-                <Button
-                  className={'w-full animate-pulse mt-3'}
-                  title={'Отправить'}
-                  type={'button'}
-                  onClick={sendQuestion}
-                />
-              }
-            </div>
+      <Form onSubmit={submit}>
+        <div className={'flex items-start gap-7'}>
+          <div className={'flex flex-col gap-5 w-3/4'}>
+            {questionsJSX}
           </div>
-        </Form>
-      </div>
+          <div className={'sticky w-1/4 top-8 flex flex-col'}>
+            <ProgressExam current={progress.current} total={progress.total} />
+            {progress.finish &&
+              <Button
+                className={'w-full animate-pulse mt-3'}
+                title={'Отправить'}
+                type={'button'}
+                onClick={sendQuestion}
+              />
+            }
+          </div>
+        </div>
+      </Form>
     </Container>
   )
 }
