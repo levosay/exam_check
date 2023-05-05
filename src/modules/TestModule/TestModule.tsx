@@ -53,7 +53,7 @@ export const TestModule: FunctionComponent<
 
   return (
     <Container>
-      <Form onSubmit={submit}>
+      <Form onSubmit={submit} autoSubmit>
         <div className={'flex items-start gap-7'}>
           <div className={'flex flex-col gap-5 w-3/4'}>
             {questionsJSX}

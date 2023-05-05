@@ -1,5 +1,5 @@
 import { postSignin, postSignup } from 'api/endpoints'
-import { setCookie, deleteCookie } from 'cookies-next'
+import { deleteCookie, setCookie } from 'cookies-next'
 import { useState } from 'react'
 import { useBlackRout } from 'hooks'
 import { TSigninBody, TSignupBody } from 'api/models'
@@ -28,7 +28,7 @@ export const useAuthUser = () => {
         }
       })
       .catch(({ response }) => {
-        setMesReq({ ...mesReq, error: response.data.message })
+        setMesReq({ ...mesReq, error: response?.data.message })
       })
   }
 

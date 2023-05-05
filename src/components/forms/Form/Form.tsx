@@ -9,15 +9,22 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { IHookFormValues } from 'types/forms'
 
 export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
-  & FormExtensions = ({ children, onSubmit, schema }): JSX.Element => {
+  & FormExtensions = ({
+  children,
+  onSubmit,
+  schema,
+  autoSubmit
+}): JSX.Element => {
   const methods = useForm<IHookFormValues>({
     resolver: schema && yupResolver(schema)
   })
 
   useEffect(() => {
-    const handleSignup = methods.handleSubmit(onSubmit) as UseFormWatch<IHookFormValues>
-    const subscription = methods.watch(handleSignup)
-    return () => subscription.unsubscribe()
+    if (autoSubmit) {
+      const handleSignup = methods.handleSubmit(onSubmit) as UseFormWatch<IHookFormValues>
+      const subscription = methods.watch(handleSignup)
+      return () => subscription.unsubscribe()
+    }
   }, [methods.handleSubmit, methods.watch])
 
   return (
