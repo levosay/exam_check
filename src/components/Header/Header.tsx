@@ -8,8 +8,9 @@ import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
-  const { toCustomRoute } = useBlackRout()
+  const { asPath, toCustomRoute } = useBlackRout()
   const { data, isLoading } = useQuery<IUser>(['user'], getMe)
+  const isShowBtnAccount = !(asPath.match('/signin') || asPath.match('/signup'))
 
   const buttonContent = useMemo(() => {
     if (isLoading) return <Loader height={'h-2'} weight={'w-2'} />
@@ -22,20 +23,31 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
     if (!data?.username && !isLoading) toCustomRoute('/signin')
   }, [data?.username, isLoading])
 
+
   return (
     <Container>
-      <div className="mx-auto py-8 mb-5 flex justify-between">
+      <div
+        className="mx-auto py-8 max-md:py-4 mb-5 max-md:mb-1 flex justify-between">
         <div className="flex items-center gap-1">
-          <Icon id={'book-open'} color={'prim-light'} />
-          <Link href={'/'}>
-            <h2 className="text-prim">Exam Check</h2>
+          <Link href={'/'} className={'flex gap-2'}>
+            <Icon
+              id={'book-open'}
+              color={'prim-light'}
+              height={'h-4'}
+              width={'w-4'}
+            />
+            <h2
+              className={`text-2xl text-prim ${isShowBtnAccount && 'max-md:hidden'}`}>Exam
+              Check</h2>
           </Link>
         </div>
-        <Button
-          className={'h-4 min-w-100'}
-          title={buttonContent}
-          onClick={buttonHandler}
-        />
+        {isShowBtnAccount &&
+          <Button
+            className={'h-4 min-w-100'}
+            title={buttonContent}
+            onClick={buttonHandler}
+          />
+        }
       </div>
     </Container>
   )

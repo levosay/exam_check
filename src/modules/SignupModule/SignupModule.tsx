@@ -9,7 +9,7 @@ export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Eleme
 
   return (
     <Container>
-      <div className="max-w-sm mt-32 mx-auto">
+      <div className="max-w-sm mt-32 max-md:mt-24 mx-auto">
         <h1 className="mx-auto max-w-max mb-2 text-3xl">Регистрация</h1>
         {mesReq.error &&
           <p

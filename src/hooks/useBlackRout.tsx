@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 
 export const useBlackRout = () => {
   const router = useRouter()
+  const asPath = router.asPath
 
   const isNestedPath = useMemo(() => {
     const path = router.asPath
@@ -41,6 +42,7 @@ export const useBlackRout = () => {
   }
 
   return {
+    asPath,
     isNestedPath,
     prevPath,
     toPrevPath,
