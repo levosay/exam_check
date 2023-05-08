@@ -8,7 +8,7 @@ export const NotFoundTest: FunctionComponent<
 > = (): JSX.Element => {
   return (
     <Container>
-      <div className={'flex flex-col items-center'}>
+      <div className={'flex flex-col items-center gap-10'}>
         <span>Этот тест еще не готов</span>
         <Link href={'/'} className={'w-max'}>На главную</Link>
       </div>

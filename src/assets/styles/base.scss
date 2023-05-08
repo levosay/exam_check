@@ -1,7 +1,13 @@
 @layer base {
   body {
     @apply bg-main-dark;
-    @apply text-gray
+    @apply text-gray;
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   h1, h2, h3 {

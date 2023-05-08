@@ -8,7 +8,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
   return (
     <Container>
       <div>
-        <Link href={'/test/history/1'}>История:</Link>
+        <Link href={'/test/1'}>История:</Link>
       </div>
     </Container>
   )
