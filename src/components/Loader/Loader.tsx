@@ -4,11 +4,14 @@ import clsx from 'clsx'
 
 export const Loader: FunctionComponent<ILoaderProps> = ({
   weight = 'h-3',
-  height = 'h-3'
+  height = 'h-3',
+  center
 }): JSX.Element => {
   return (
     <svg
-      className={clsx(weight, height)}
+      className={clsx(weight, height, {
+        'mx-auto': center
+      })}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

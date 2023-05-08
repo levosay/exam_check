@@ -1,3 +1,3 @@
-export interface IAccountModuleProps {
-  message?: string
-}
+import { IUser } from 'api/models'
+
+export type TAccountModuleProps = IUser

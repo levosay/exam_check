@@ -1,27 +1,25 @@
 import { FunctionComponent } from 'react'
-import { IAccountModuleProps } from './AccountModule.d'
-import { Container, Loader } from 'components'
-import { useQuery } from '@tanstack/react-query'
-import { IUser } from 'api/models'
-import { getMe } from 'api/endpoints'
-import { InfoBlock } from './components'
+import { TAccountModuleProps } from './AccountModule.d'
+import { Container } from 'components'
+import { InfoBlock, ReviewBlock } from './components'
 
 export const AccountModule: FunctionComponent<
-  IAccountModuleProps
-> = (): JSX.Element => {
-  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
+  TAccountModuleProps
+> = ({ username, roles, exams }): JSX.Element => {
+
+  const examsJSX = exams.map((exam) => (
+    <ReviewBlock key={exam._id} {...exam} />
+  ))
+
+  console.log('exams____+____- ', exams)
 
   return (
     <Container>
-      <div className={'flex flex-col'}>
-        {isLoading
-          ? <Loader height={'h-6'} weight={'w-6'} />
-          : <>
-            <InfoBlock filedName={'Ваш Логин'} filedValue={data?.username} />
-            <InfoBlock filedName={'Ваша Роль'} filedValue={data?.roles} />
-          </>
-        }
+      <div className={'flex flex-col mb-2'}>
+        <InfoBlock filedName={'Ваш Логин'} filedValue={username} />
+        <InfoBlock filedName={'Ваша Роль'} filedValue={roles} />
       </div>
+      <div className={'flex flex-col gap-2'}>{examsJSX}</div>
     </Container>
   )
 }

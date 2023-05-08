@@ -1,4 +1,4 @@
-interface IReviewItem {
+export interface IReviewItem {
   _id: string
   title: string
   userAnswer: string
@@ -6,9 +6,9 @@ interface IReviewItem {
   pass: boolean
 }
 
-interface IExamItem {
+export interface IExamItem {
   _id: string
-  review: IReviewItem
+  review: IReviewItem[]
   date: string
   points: number
 }
