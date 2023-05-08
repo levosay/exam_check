@@ -18,8 +18,8 @@ export interface IQuestionsProps {
 
 const regQuestionsId = new RegExp(/_[a-z|0-9]*_/)
 // const regAnswerId = new RegExp(/_[0-9]$/)
-const regTypeCheck = new RegExp(/^questionCheck/)
-const regTypeText = new RegExp(/^questionText/)
+const regTypeCheck = new RegExp(/^check/)
+const regTypeText = new RegExp(/^text/)
 
 const matchQuestionsTypeCheck = (string: string) => regTypeCheck.test(string)
 const matchQuestionsTypeText = (string: string) => regTypeText.test(string)

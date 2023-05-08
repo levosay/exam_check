@@ -12,6 +12,7 @@ import {
 } from 'components'
 import { IHookFormValues, } from 'types/forms'
 import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
+import { postAnswers } from 'api/endpoints'
 
 export const TestModule: FunctionComponent<
   ITestModuleProps
@@ -48,7 +49,10 @@ export const TestModule: FunctionComponent<
   }
 
   const sendQuestion = () => {
-    console.log('questionData ', questionData)
+    postAnswers(questionData).then(data => {
+      console.log('questionData ', data)
+
+    })
   }
 
   return (

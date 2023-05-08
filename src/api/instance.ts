@@ -23,3 +23,17 @@ apiAuth.interceptors.request.use(config => {
     return Promise.reject(err)
   }
 )
+
+apiExam.interceptors.request.use(config => {
+    const token = getCookie('authToken')
+
+    if (token) {
+      config.headers['Authorization'] = `Basic ${token}`
+    }
+
+    return config
+  },
+  (err) => {
+    return Promise.reject(err)
+  }
+)

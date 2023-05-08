@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { TQuestionsSequenceProps } from './QuestionsSequence.d'
-import { Form } from '@/src/components'
+import { Form } from 'components'
 
 export const QuestionsSequence: FunctionComponent<
   TQuestionsSequenceProps
@@ -15,7 +15,7 @@ export const QuestionsSequence: FunctionComponent<
       <div className={'flex flex-col gap-1 mb-2'}>{answersJSX}</div>
       <Form.Input
         hookFormProps={{
-          inputFormName: `questionText_${_id}_`
+          inputFormName: `text_${_id}_`
         }}
         placeholder={'Введите ответ'}
       />

@@ -15,7 +15,7 @@ export const QuestionsChoose: FunctionComponent<
       value={item}
       labelMessage={item}
       hookFormProps={{
-        inputFormName: `questionCheck_${_id}_${index}`
+        inputFormName: `check_${_id}_${index}`
       }}
     />
   ))
