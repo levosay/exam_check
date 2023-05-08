@@ -58,11 +58,12 @@ export const TestModule: FunctionComponent<
   return (
     <Container>
       <Form onSubmit={submit} autoSubmit>
-        <div className={'flex items-start gap-7'}>
-          <div className={'flex flex-col gap-5 w-3/4'}>
+        <div className={'flex max-md:flex-col items-start gap-7'}>
+          <div className={'flex flex-col gap-5 w-3/4 max-md:w-full'}>
             {questionsJSX}
           </div>
-          <div className={'sticky w-1/4 top-8 flex flex-col'}>
+          <div
+            className={'sticky max-md:fixed w-1/4 max-md:w-full top-8 max-md:top-auto max-md:bottom-0 max-md:left-0 flex flex-col max-md:flex-col-reverse'}>
             <ProgressExam current={progress.current} total={progress.total} />
             {progress.finish &&
               <Button
