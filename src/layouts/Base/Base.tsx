@@ -4,8 +4,8 @@ import { Footer, Header } from 'components'
 import { getCookie } from 'cookies-next'
 import { useBlackRout } from 'hooks'
 import { useQuery } from '@tanstack/react-query'
-import { IUser } from '@/src/api/models'
-import { getMe } from '@/src/api/endpoints'
+import { IUser } from 'api/models'
+import { getMe } from 'api/endpoints'
 
 export const Base: FunctionComponent<PropsWithChildren<IBaseProps>> = ({
   children

@@ -1,8 +1,8 @@
 import { FunctionComponent, PropsWithChildren } from 'react'
 import { IModalProps } from './Modal.d'
 import { default as ReactModal } from 'react-modal'
-import { Icon } from '@/src/components'
-import { useScrollBlock } from '@/src/hooks'
+import { Icon } from 'components'
+import { useScrollBlock } from 'hooks'
 
 const customStyles = {
   content: {

@@ -1,9 +1,9 @@
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { AccountModule } from 'modules'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
-import { IUser } from '@/src/api/models'
-import { getMe } from '@/src/api/endpoints'
-import { Loader } from '@/src/components'
+import { IUser } from 'api/models'
+import { getMe } from 'api/endpoints'
+import { Loader } from 'components'
 
 const Account: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>

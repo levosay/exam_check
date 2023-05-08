@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { INotFoundTetsProps } from './NotFoundTest.d'
-import { Container, NextLink } from '@/src/components'
+import { Container, NextLink } from 'components'
 
 export const NotFoundTest: FunctionComponent<
   INotFoundTetsProps

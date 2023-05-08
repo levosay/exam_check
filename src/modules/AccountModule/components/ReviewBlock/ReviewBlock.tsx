@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react'
 import { TReviewBlockProps } from './ReviewBlock.d'
 import { ReviewItem } from './components'
-import { Icon } from '@/src/components'
+import { Icon } from 'components'
 
 export const ReviewBlock: FunctionComponent<
   TReviewBlockProps
