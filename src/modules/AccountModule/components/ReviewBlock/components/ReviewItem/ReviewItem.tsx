@@ -5,6 +5,7 @@ import { Button, Modal } from 'components'
 
 const initHint = {
   show: false,
+  title: '',
   text: '',
 }
 
@@ -15,9 +16,10 @@ export const ReviewItem: FunctionComponent<
 
   console.log('__+_+_++_ ', { title, passAnswer, userAnswer, pass })
 
-  const openModal = (text: string) => {
+  const openModal = (title: string, text: string) => {
     setShowHint({
       show: true,
+      title,
       text
     })
   }
@@ -36,23 +38,24 @@ export const ReviewItem: FunctionComponent<
         <Button
           title={'Ваш ответ'}
           className={'bg-gray border-0 hover:bg-gray shadow-lg hover:shadow-second-prime-light anim'}
-          onClick={() => openModal(userAnswer)}
+          onClick={() => openModal('Ваш ответ', userAnswer)}
         />
         {!pass &&
           <Button
             title={'Правильный ответ'}
             className={'bg-gray border-0 hover:bg-gray shadow-md hover:shadow-second-prime anim'}
-            onClick={() => openModal(passAnswer)}
+            onClick={() => openModal('Правильный ответ', passAnswer)}
           />
         }
       </div>
 
       <Modal
         show={showHint.show}
-        title={'Ответ'}
+        title={showHint.title}
         onClose={closeModal}
       >
-        {showHint.text}
+        <p>Вопрос: {title}</p>
+        <p>Ответ: {showHint.text}</p>
       </Modal>
     </div>
   )

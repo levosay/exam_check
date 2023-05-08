@@ -2,16 +2,16 @@ import { FunctionComponent, PropsWithChildren } from 'react'
 import { IModalProps } from './Modal.d'
 import { default as ReactModal } from 'react-modal'
 import { Icon } from '@/src/components'
+import { useScrollBlock } from '@/src/hooks'
 
 const customStyles = {
   content: {
     borderRadius: '20px',
-    padding: 'unset',
-    overflow: 'visible',
+    padding: '24px',
+    margin: '16px',
+    overflow: 'hidden',
     background: '#CBD5E1',
     border: 'none',
-    width: '50%',
-    height: '50%',
     top: 'auto',
     right: 'auto',
     bottom: 'auto',
@@ -26,10 +26,10 @@ const customStyles = {
   },
 }
 
-// cross
-
 export const Modal: FunctionComponent<PropsWithChildren<IModalProps>>
   = ({ show, title, onClose, children }): JSX.Element => {
+  useScrollBlock(show)
+
   return (
     <ReactModal
       isOpen={show}
@@ -37,7 +37,7 @@ export const Modal: FunctionComponent<PropsWithChildren<IModalProps>>
       style={customStyles}
       onRequestClose={onClose}
     >
-      <div className={'p-4 relative'}>
+      <div className={'relative'}>
         <div className={'flex items-center justify-between mb-4'}>
           <h2 className={'text-main-dark'}>{title}</h2>
           <div
