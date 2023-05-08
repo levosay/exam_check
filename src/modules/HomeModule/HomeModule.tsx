@@ -18,9 +18,10 @@ const cards: ICards[] = [
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
   const cardsJSX = cards.map(({ title, text, href }) => (
-    <Link key={title} href={href}>
+    <Link key={title} href={href} className={'rounded-2xl overflow-hidden'}>
       <div
-        className={'flex flex-col gap-2 w-300 max-md:w-full bg-gray rounded-2xl p-4 text-main-dark bg-indigo-500 shadow-lg hover:shadow-second-prime-light anim'}>
+        className={'flex flex-col gap-2 w-300 max-md:w-full bg-gray p-4 text-main-dark bg-indigo-500 shadow-lg hover:shadow-second-prime-light anim'}
+      >
         <h3 className={'text-second-prime text-2xl'}>{title}</h3>
         <p>{text}</p>
       </div>
@@ -29,7 +30,11 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
 
   return (
     <Container>
-      <div className={'flex gap-8 max-md:flex-col'}>{cardsJSX}</div>
+      <div
+        className={'flex items-start gap-8 max-md:flex-col max-md:items-stretch'}
+      >
+        {cardsJSX}
+      </div>
     </Container>
   )
 }
