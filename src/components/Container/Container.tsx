@@ -6,5 +6,5 @@ export const Container: FunctionComponent<PropsWithChildren<IContainerProps>> = 
   tailClass
 }): JSX.Element => {
   return <div
-    className={`max-w-1520 w-full mx-auto px-10 ${tailClass}`}>{children}</div>
+    className={`max-w-1520 w-full mx-auto px-10 max-md:px-3 ${tailClass}`}>{children}</div>
 }

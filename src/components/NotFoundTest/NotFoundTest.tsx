@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react'
 import { INotFoundTetsProps } from './NotFoundTest.d'
-import { Container } from '@/src/components'
-import Link from 'next/link'
+import { Container, NextLink } from '@/src/components'
 
 export const NotFoundTest: FunctionComponent<
   INotFoundTetsProps
@@ -10,7 +9,7 @@ export const NotFoundTest: FunctionComponent<
     <Container>
       <div className={'flex flex-col items-center gap-10'}>
         <span>Этот тест еще не готов</span>
-        <Link href={'/'} className={'w-max'}>На главную</Link>
+        <NextLink href={'/'}>На главную</NextLink>
       </div>
     </Container>
   )

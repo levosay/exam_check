@@ -2,9 +2,9 @@ import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import { getQuestions } from 'api/endpoints'
 import { TestModule } from 'modules'
-import { IQuestions } from '@/src/api/models/questions'
+import { IQuestions } from 'api/models/questions'
 import { NotFoundTest } from 'components'
-import { Params } from '@/src/types'
+import { Params } from 'types'
 
 const Test: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
