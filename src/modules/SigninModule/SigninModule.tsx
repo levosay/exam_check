@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react'
 import { ISigninModuleProps } from './SigninModule.d'
-import { Form, Container, Button } from 'components'
+import { Button, Container, Form, NextLink } from 'components'
 import { schema } from './schema'
 import { useAuthUser } from 'hooks'
-import Link from 'next/link'
 
 export const SigninModule: FunctionComponent<ISigninModuleProps> = (): JSX.Element => {
   const { signinWithCookies, mesReq } = useAuthUser()
@@ -35,7 +34,7 @@ export const SigninModule: FunctionComponent<ISigninModuleProps> = (): JSX.Eleme
           />
           <Button title={'Войти'} className="mt-2 ml-auto" />
         </Form>
-        <Link href="/signup">Регистрация</Link>
+        <NextLink href="/signup">Регистрация</NextLink>
       </div>
     </Container>
 

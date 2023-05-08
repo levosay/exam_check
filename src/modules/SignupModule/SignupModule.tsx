@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react'
 import { ISignupModuleProps } from './SignupModule.d'
-import { Form, Container, Button } from 'components'
+import { Button, Container, Form, NextLink } from 'components'
 import { schema } from './schema'
 import { useAuthUser } from 'hooks'
-import Link from 'next/link'
 
 export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Element => {
   const { signupWithRoute, mesReq } = useAuthUser()
@@ -42,7 +41,7 @@ export const SignupModule: FunctionComponent<ISignupModuleProps> = (): JSX.Eleme
           />
           <Button title={'Отправить'} className="mt-2 ml-auto" />
         </Form>
-        <Link href="/signin">Авторизоваться</Link>
+        <NextLink href="/signin">Авторизоваться</NextLink>
       </div>
     </Container>
 
