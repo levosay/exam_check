@@ -12,6 +12,7 @@ export const QuestionsChoose: FunctionComponent<
   const answersJSX = answers.map((item, index) => (
     <Form.Checkbox
       key={_id + item}
+      value={item}
       labelMessage={item}
       hookFormProps={{
         inputFormName: `questionCheck_${_id}_${index}`

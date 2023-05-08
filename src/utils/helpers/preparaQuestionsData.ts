@@ -1,37 +1,23 @@
 import { IHookFormValues, } from 'types/forms'
 
-export interface IIQuestionCheckAnswers {
-  id: string
-  value: boolean | string
-}
-
 export interface IQuestionItem {
   id: string
   type: string
-  answers: IIQuestionCheckAnswers[]
+  answers: string[]
 }
 
 export interface IQuestionData {
   [key: string]: IQuestionItem | Record<string, never>
 }
 
-interface ICreateQuestionsDefaultProps {
+export interface IQuestionsProps {
+  value: string | boolean
   obj: IQuestionData
   key: string
 }
 
-export interface IQuestionsCheckProps
-  extends ICreateQuestionsDefaultProps {
-  value: boolean
-}
-
-export interface IQuestionsTextProps
-  extends ICreateQuestionsDefaultProps {
-  value: string
-}
-
 const regQuestionsId = new RegExp(/_[a-z|0-9]*_/)
-const regAnswerId = new RegExp(/_[0-9]$/)
+// const regAnswerId = new RegExp(/_[0-9]$/)
 const regTypeCheck = new RegExp(/^questionCheck/)
 const regTypeText = new RegExp(/^questionText/)
 
@@ -43,41 +29,36 @@ const getQuestionsId = (string: string) => {
     .replace(/_$/g, '') || ''
 }
 
-const getAnswerId = (string: string) => {
-  return string.match(regAnswerId)?.shift()?.replace(/^_/g, '') || ''
-}
+// const getAnswerId = (string: string) => {
+//   return string.match(regAnswerId)?.shift()?.replace(/^_/g, '') || ''
+// }
 
 const getQuestionsType = (string: string) => {
   return string.match(regTypeCheck)
     ?.shift() || string.match(regTypeText)?.shift() || ''
 }
 
-const createQuestionsCheck = ({ obj, key, value }: IQuestionsCheckProps) => {
-  const fieldName = getQuestionsId(key)
-  obj[fieldName] = {}
-  obj[fieldName].id = fieldName
-  obj[fieldName].type = getQuestionsType(key)
-  obj[fieldName].answers = [{
-    id: getAnswerId(key), value: value
-  }]
+const createQuestionsCheck = ({ obj, key, value }: IQuestionsProps) => {
+  if (!!value && typeof value === 'string') {
+    const fieldName = getQuestionsId(key)
+    obj[fieldName] = {}
+    obj[fieldName].id = fieldName
+    obj[fieldName].type = getQuestionsType(key)
+    obj[fieldName].answers = [value]
+  }
 }
 
-const updateQuestionsCheck = ({ obj, key, value }: IQuestionsCheckProps) => {
+const updateQuestionsCheck = ({ obj, key, value }: IQuestionsProps) => {
   const fieldName = getQuestionsId(key)
-  obj[fieldName].answers = [...obj[fieldName].answers, {
-    id: getAnswerId(key), value: value
-  }]
+  if (!!value && typeof value === 'string') {
+    if (Array.isArray(obj[fieldName].answers) && obj[fieldName].answers.length) {
+      obj[fieldName].answers = [...obj[fieldName].answers, value]
+    }
+  }
 }
 
-const createQuestionsText = ({ obj, key, value }: IQuestionsTextProps) => {
-  const fieldName = getQuestionsId(key)
-  obj[fieldName] = {}
-  obj[fieldName].id = fieldName
-  obj[fieldName].type = getQuestionsType(key)
-  obj[fieldName].answers = [{
-    id: fieldName,
-    value: value
-  }]
+const createQuestionsText = ({ obj, key, value }: IQuestionsProps) => {
+  createQuestionsCheck({ obj, key, value })
 }
 
 export const prepareQuestionsData = (data: IHookFormValues) => {

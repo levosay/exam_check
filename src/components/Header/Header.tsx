@@ -23,7 +23,6 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
     if (!data?.username && !isLoading) toCustomRoute('/signin')
   }, [data?.username, isLoading])
 
-
   return (
     <Container>
       <div
