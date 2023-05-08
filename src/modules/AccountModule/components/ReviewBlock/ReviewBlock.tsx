@@ -7,13 +7,14 @@ export const ReviewBlock: FunctionComponent<
   TReviewBlockProps
 > = ({ review, points, date }): JSX.Element => {
   const [open, setOpen] = useState(false)
+
   const examsJSX = review.map((item) => (
     <ReviewItem key={item._id} {...item} />
   ))
 
   return (
     <div
-      className={'flex flex-col bg-gray p-4 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
+      className={'flex flex-col bg-gray py-4 pl-4 pr-14 max-md:py-2 max-md:pl-2 max-md:pr-5 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
     >
       <p>Количество баллов: {points}</p>
       <p>Дата сдачи: {date}</p>
@@ -23,7 +24,7 @@ export const ReviewBlock: FunctionComponent<
         </div>
       )}
       <div
-        className={'absolute right-10 top-14 -translate-y-1/2 cursor-pointer hover:text-prim anim'}
+        className={'absolute right-10 max-md:right-3 top-14 max-md:top-5 -translate-y-1/2 max-md:-translate-y-2 cursor-pointer hover:text-prim anim'}
         onClick={() => setOpen(!open)}
       >
         <Icon id={open ? 'chevron-up' : 'chevron-down'} />

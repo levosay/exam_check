@@ -6,12 +6,9 @@ import { InfoBlock, ReviewBlock } from './components'
 export const AccountModule: FunctionComponent<
   TAccountModuleProps
 > = ({ username, roles, exams }): JSX.Element => {
-
   const examsJSX = exams.map((exam) => (
     <ReviewBlock key={exam._id} {...exam} />
   ))
-
-  console.log('exams____+____- ', exams)
 
   return (
     <Container>

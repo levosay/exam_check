@@ -14,8 +14,6 @@ export const ReviewItem: FunctionComponent<
 > = ({ title, passAnswer, userAnswer, pass }): JSX.Element => {
   const [showHint, setShowHint] = useState(initHint)
 
-  console.log('__+_+_++_ ', { title, passAnswer, userAnswer, pass })
-
   const openModal = (title: string, text: string) => {
     setShowHint({
       show: true,
@@ -29,12 +27,13 @@ export const ReviewItem: FunctionComponent<
   }
 
   return (
-    <div className={clsx('flex items-center gap-2 px-2 py-1 rounded-2xl', {
-      'bg-prim-light': pass,
-      'bg-second-prime-light': !pass
-    })}>
+    <div
+      className={clsx('flex max-md:flex-col items-center max-md:items-start gap-2 px-2 py-1 rounded-2xl', {
+        'bg-prim-light': pass,
+        'bg-second-prime-light': !pass
+      })}>
       <span>{title}</span>
-      <div className={'flex gap-2 ml-auto'}>
+      <div className={'flex flex-wrap gap-2 max-md:gap-1 ml-auto max-md:ml-0'}>
         <Button
           title={'Ваш ответ'}
           className={'bg-gray border-0 hover:bg-gray shadow-lg hover:shadow-second-prime-light anim'}
@@ -48,7 +47,6 @@ export const ReviewItem: FunctionComponent<
           />
         }
       </div>
-
       <Modal
         show={showHint.show}
         title={showHint.title}
