@@ -19,6 +19,7 @@ export const AccountModule: FunctionComponent<
         <InfoBlock filedName={'Ваш Логин'} filedValue={username} />
         <InfoBlock filedName={'Ваша Роль'} filedValue={roles} />
         <Button
+          className={'h-4 mt-2'}
           title={'Выйти'}
           onClick={logOut}
         />

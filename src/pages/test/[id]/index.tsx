@@ -1,6 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
-import { getMe, getQuestions } from 'api/endpoints'
+import { getQuestions } from 'api/endpoints'
 import { TestModule } from 'modules'
 import { IQuestions } from 'api/models/questions'
 import { NotFoundTest } from 'components'
@@ -22,7 +22,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     queryClient.fetchQuery(['test', id], async () => getQuestions(id))
-    queryClient.fetchQuery(['user'], getMe)
   } catch {
     return {
       notFound: true,
