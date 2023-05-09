@@ -45,6 +45,7 @@ export const useAuthUser = () => {
 
   const logOut = () => {
     deleteCookie('authToken', { path: '/' })
+    toCustomRoute('/signin')
   }
 
   return {

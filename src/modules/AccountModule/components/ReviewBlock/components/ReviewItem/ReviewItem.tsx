@@ -28,7 +28,7 @@ export const ReviewItem: FunctionComponent<
 
   return (
     <div
-      className={clsx('flex max-md:flex-col items-center max-md:items-start gap-2 px-2 py-1 rounded-2xl', {
+      className={clsx('flex max-md:flex-col items-center max-md:items-start gap-2 max-md:gap-1 px-2 py-1 rounded-2xl', {
         'bg-prim-light': pass,
         'bg-second-prime-light': !pass
       })}>

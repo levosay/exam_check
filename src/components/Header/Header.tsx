@@ -6,22 +6,24 @@ import { Button, Container, Icon, Loader } from 'components'
 import { useQuery } from '@tanstack/react-query'
 import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
+import { getCookie } from 'cookies-next'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { asPath, toCustomRoute } = useBlackRout()
-  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
+  const token = getCookie('authToken')
+  const { data, isLoading } = useQuery<IUser>(['user', asPath, token], getMe)
   const isShowBtnAccount = !(asPath.match('/signin') || asPath.match('/signup'))
 
   const buttonContent = useMemo(() => {
     if (isLoading) return <Loader height={'h-2'} weight={'w-2'} />
     if (data?.username) return data?.username
     return 'Войти'
-  }, [data?.username, isLoading])
+  }, [token, data?.username, isLoading])
 
   const buttonHandler = useCallback(() => {
     if (data?.username) toCustomRoute('/account')
     if (!data?.username && !isLoading) toCustomRoute('/signin')
-  }, [data?.username, isLoading])
+  }, [token, data?.username, isLoading])
 
   return (
     <Container>
@@ -36,8 +38,10 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
               width={'w-4'}
             />
             <h2
-              className={`text-2xl text-prim ${isShowBtnAccount && 'max-md:hidden'}`}>Exam
-              Check</h2>
+              className={`text-2xl text-prim ${isShowBtnAccount && 'max-md:hidden'}`}
+            >
+              Exam Check
+            </h2>
           </Link>
         </div>
         {isShowBtnAccount &&

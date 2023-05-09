@@ -20,7 +20,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
   const cardsJSX = cards.map(({ title, text, href }) => (
     <Link key={title} href={href}>
       <div
-        className={'flex flex-col gap-2 w-300 max-md:w-full bg-gray p-4 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim'}
+        className={'flex flex-col gap-2 max-md:gap-1 w-300 max-md:w-full bg-gray p-4 max-md:py-2 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim'}
       >
         <h3 className={'text-second-prime text-2xl'}>{title}</h3>
         <p>{text}</p>
@@ -31,7 +31,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
   return (
     <Container>
       <div
-        className={'flex items-start gap-8 max-md:flex-col max-md:items-stretch'}
+        className={'flex items-start gap-3 max-md:gap-2 max-md:flex-col max-md:items-stretch'}
       >
         {cardsJSX}
       </div>

@@ -14,12 +14,15 @@ export const ReviewBlock: FunctionComponent<
 
   return (
     <div
-      className={'flex flex-col bg-gray py-4 pl-4 pr-14 max-md:py-2 max-md:pl-2 max-md:pr-5 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
+      className={'flex flex-col bg-gray p-4 max-md:p-2 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
     >
-      <p>Количество баллов: {points}</p>
-      <p>Дата сдачи: {date}</p>
+      <div className={'pr-3'}>
+        <p>Количество баллов: {points}</p>
+        <p>Дата сдачи: {date}</p>
+      </div>
       {open && (
-        <div className={'flex flex-col gap-2 pt-2 mt-1 border-t-2'}>
+        <div
+          className={'flex flex-col gap-2 max-md:gap-1 pt-2 max-md:pt-1 mt-1 border-t-2'}>
           {examsJSX}
         </div>
       )}
