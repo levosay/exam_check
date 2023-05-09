@@ -5,6 +5,8 @@ import {
   Button,
   Container,
   Form,
+  Modal,
+  NextLink,
   ProgressExam,
   QuestionsChoose,
   QuestionsSequence,
@@ -14,10 +16,16 @@ import { IHookFormValues, } from 'types/forms'
 import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
 import { postAnswers } from 'api/endpoints'
 
+const initResultPoints = {
+  show: false,
+  points: 0
+}
+
 export const TestModule: FunctionComponent<
   ITestModuleProps
 > = ({ questions }): JSX.Element => {
   const [questionData, setQuestionData] = useState<IQuestionData>({})
+  const [resultPoints, setResultPoints] = useState(initResultPoints)
   const [progress, setProgress] = useState({
     current: 0,
     total: questions.length,
@@ -49,10 +57,20 @@ export const TestModule: FunctionComponent<
   }
 
   const sendQuestion = () => {
-    postAnswers(questionData).then(data => {
-      console.log('questionData ', data)
+    postAnswers(questionData)
+      .then(data => {
+        setResultPoints({
+          show: true,
+          points: data
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-    })
+  const closeModal = () => {
+    setResultPoints(initResultPoints)
   }
 
   return (
@@ -76,6 +94,18 @@ export const TestModule: FunctionComponent<
           </div>
         </div>
       </Form>
+      <Modal
+        show={resultPoints.show}
+        title={'Вы сдали тест, поздравляем!'}
+        onClose={closeModal}
+      >
+        <p>Количество набранных баллов: {resultPoints.points}</p>
+        <p>Подробную статистику о тесте Вы можете посмотреть в{' '}
+          <NextLink href={'/account'}>
+            личном кабинете
+          </NextLink>
+        </p>
+      </Modal>
     </Container>
   )
 }
