@@ -1,4 +1,8 @@
+import { isClient } from 'utils/constants'
+
 export const getCookie = (cname: string) => {
+  if (!isClient) return ''
+
   const name = cname + '='
   const decodedCookie = decodeURIComponent(document.cookie)
   const ca = decodedCookie.split(';')
