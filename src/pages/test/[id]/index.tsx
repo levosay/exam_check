@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import { getQuestions } from 'api/endpoints'
 import { TestModule } from 'modules'
@@ -7,7 +7,7 @@ import { Loader, NotFoundTest } from 'components'
 import { Params } from 'types'
 
 const Test: NextPage<
-  InferGetStaticPropsType<typeof getStaticProps>
+  InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ id }) => {
   const { data, isLoading } = useQuery<IQuestions[]>(
     ['test', id],
@@ -20,16 +20,7 @@ const Test: NextPage<
   return <TestModule questions={data} />
 }
 
-export const getStaticPaths = async () => {
-  const paths = [1, 2].map((id) => ({
-    params: { id }
-  }))
-
-  return { paths, fallback: 'blocking' }
-}
-
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as Params
   const queryClient = new QueryClient()
 
@@ -37,8 +28,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     queryClient.fetchQuery(['test', id], async () => getQuestions(id))
   } catch {
     return {
-      notFound: true,
-      revalidate: 60
+      notFound: true
     }
   }
 
@@ -46,10 +36,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       dehydratedState: dehydrate(queryClient),
       id
-    },
-    revalidate: 60
+    }
   }
 }
-
 
 export default Test
