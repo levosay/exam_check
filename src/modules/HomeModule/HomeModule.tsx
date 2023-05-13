@@ -1,7 +1,12 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { ICards, IHomeModuleProps } from './HomeModule.d'
-import { Container } from 'components'
+import { Container, Loader } from 'components'
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
+import { IUser } from 'api/models'
+import { getMe } from 'api/endpoints'
+import { useBlackRout } from 'hooks'
+import { getCookie } from 'cookies-next'
 
 const cards: ICards[] = [
   {
@@ -17,6 +22,14 @@ const cards: ICards[] = [
 ]
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
+  const { asPath, toCustomRoute } = useBlackRout()
+  const token = getCookie('authToken')
+  const { data, isLoading } = useQuery<IUser>(['user', asPath, token], getMe)
+
+  useEffect(() => {
+    if (!data?.username && !isLoading) toCustomRoute('/signin')
+  }, [data?.username, isLoading])
+
   const cardsJSX = cards.map(({ title, text, href }) => (
     <Link key={title} href={href}>
       <div
@@ -33,7 +46,10 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
       <div
         className={'flex items-start gap-3 max-md:gap-2 max-md:flex-col max-md:items-stretch'}
       >
-        {cardsJSX}
+        {data?.username && !isLoading
+          ? cardsJSX
+          : <Loader weight={'w-7'} height={'h-7'} center />
+        }
       </div>
     </Container>
   )
