@@ -11,7 +11,7 @@ import { getCookie } from 'cookies-next'
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { asPath, toCustomRoute } = useBlackRout()
   const token = getCookie('authToken')
-  const { data, isLoading } = useQuery<IUser>(['user', asPath, token], getMe)
+  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
   const isShowBtnAccount = !(asPath.match('/signin') || asPath.match('/signup'))
 
   const buttonContent = useMemo(() => {
@@ -30,7 +30,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
       <div
         className="mx-auto py-8 max-md:py-4 mb-5 max-md:mb-1 flex justify-between">
         <div className="flex items-center gap-1">
-          <Link href={'/'} className={'flex gap-2'}>
+          <Link href={token ? '/' : asPath} className={'flex gap-2'}>
             <Icon
               id={'book-open'}
               color={'prim-light'}

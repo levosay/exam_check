@@ -3,15 +3,19 @@ import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import { getQuestions } from 'api/endpoints'
 import { TestModule } from 'modules'
 import { IQuestions } from 'api/models/questions'
-import { NotFoundTest } from 'components'
+import { Loader, NotFoundTest } from 'components'
 import { Params } from 'types'
 
 const Test: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ id }) => {
-  const { data } = useQuery<IQuestions[]>(['test'], async () => getQuestions(id))
+  const {
+    data,
+    isLoading
+  } = useQuery<IQuestions[]>(['test'], async () => getQuestions(id))
 
-  if (!data?.length) return <NotFoundTest />
+  if (!data && isLoading) return <Loader weight={'w-7'} height={'h-7'} center />
+  if (!data?.length && !isLoading) return <NotFoundTest />
 
   return <TestModule questions={data} />
 }
