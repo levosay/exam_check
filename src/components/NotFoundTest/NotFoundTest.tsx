@@ -8,7 +8,7 @@ export const NotFoundTest: FunctionComponent<
   return (
     <Container>
       <div className={'flex flex-col items-center gap-4'}>
-        <span>Этот тест еще не готов или Вам нужно авторизоваться</span>
+        <span>Этот тест еще не готов {showBtnLogin && ' или Вам нужно авторизоваться'}</span>
         <NextLink href={'/'}>На главную</NextLink>
         {showBtnLogin && <NextLink href={'/signin'}>Авторизоваться</NextLink>}
       </div>
