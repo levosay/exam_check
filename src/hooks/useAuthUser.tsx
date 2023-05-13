@@ -1,8 +1,9 @@
-import { postSignin, postSignup } from 'api/endpoints'
+import { getMe, postSignin, postSignup } from 'api/endpoints'
 import { deleteCookie, setCookie } from 'cookies-next'
 import { useState } from 'react'
 import { useBlackRout } from 'hooks'
 import { TSigninBody, TSignupBody } from 'api/models'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface IInitMesRequest {
   message: string
@@ -17,6 +18,7 @@ const initMesReq: IInitMesRequest = {
 export const useAuthUser = () => {
   const [mesReq, setMesReq] = useState<IInitMesRequest>(initMesReq)
   const { toHomePath, toCustomRoute } = useBlackRout()
+  const queryClient = useQueryClient()
 
   const signinWithCookies = (body: TSigninBody) => {
     postSignin(body)
@@ -24,6 +26,7 @@ export const useAuthUser = () => {
         if (data) {
           setCookie('authToken', data.token)
           setMesReq(mesReq)
+          queryClient.fetchQuery(['user'], getMe)
           toHomePath()
         }
       })
