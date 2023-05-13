@@ -1,4 +1,4 @@
-import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
 import { getQuestions } from 'api/endpoints'
 import { TestModule } from 'modules'
@@ -7,12 +7,12 @@ import { Loader, NotFoundTest } from 'components'
 import { Params } from 'types'
 
 const Test: NextPage<
-  InferGetServerSidePropsType<typeof getServerSideProps>
+  InferGetStaticPropsType<typeof getStaticProps>
 > = ({ id }) => {
-  const {
-    data,
-    isLoading
-  } = useQuery<IQuestions[]>(['test'], async () => getQuestions(id))
+  const { data, isLoading } = useQuery<IQuestions[]>(
+    ['test', id],
+    async () => getQuestions(id)
+  )
 
   if (!data && isLoading) return <Loader weight={'w-7'} height={'h-7'} center />
   if (!data?.length && !isLoading) return <NotFoundTest />
@@ -20,7 +20,16 @@ const Test: NextPage<
   return <TestModule questions={data} />
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths = async () => {
+  const paths = [1, 2].map((id) => ({
+    params: { id }
+  }))
+
+  return { paths, fallback: 'blocking' }
+}
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as Params
   const queryClient = new QueryClient()
 
