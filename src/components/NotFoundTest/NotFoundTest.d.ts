@@ -1,3 +1,3 @@
 export interface INotFoundTetsProps {
-  message?: string
+  showBtnLogin?: boolean
 }
