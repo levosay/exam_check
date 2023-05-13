@@ -28,7 +28,7 @@ export const useAuthUser = () => {
           setMesReq(mesReq)
           queryClient.fetchQuery({
             queryKey: ['user'],
-            queryFn: async () => await getMe()
+            queryFn: getMe
           })
           toHomePath()
         }

@@ -22,7 +22,7 @@ const cards: ICards[] = [
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
   const { data, isLoading } = useQuery<IUser>({
       queryKey: ['user'],
-      queryFn: async () => await getMe()
+      queryFn: getMe
     }
   )
 

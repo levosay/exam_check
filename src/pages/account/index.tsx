@@ -10,7 +10,7 @@ const Account: NextPage<
 > = () => {
   const { data, isLoading } = useQuery<IUser>({
       queryKey: ['user'],
-      queryFn: async () => await getMe()
+      queryFn: getMe
     }
   )
 
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   try {
     queryClient.fetchQuery({
       queryKey: ['user'],
-      queryFn: async () => await getMe()
+      queryFn: getMe
     })
   } catch {
     return {

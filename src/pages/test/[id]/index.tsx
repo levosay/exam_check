@@ -12,7 +12,7 @@ const Test: NextPage<
 > = ({ id }) => {
   const { data: userData, isLoading: userIsLoading } = useQuery<IUser>({
       queryKey: ['user'],
-      queryFn: async () => await getMe()
+      queryFn: getMe
     }
   )
   const { data, isLoading } = useQuery<IQuestions[]>({
