@@ -8,7 +8,11 @@ import { Loader } from 'components'
 const Account: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = () => {
-  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
+  const { data, isLoading } = useQuery<IUser>({
+      queryKey: ['user'],
+      queryFn: async () => await getMe()
+    }
+  )
 
   return (
     <>
@@ -24,7 +28,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient()
 
   try {
-    queryClient.fetchQuery(['user'], getMe)
+    queryClient.fetchQuery({
+      queryKey: ['user'],
+      queryFn: async () => await getMe()
+    })
   } catch {
     return {
       notFound: true,

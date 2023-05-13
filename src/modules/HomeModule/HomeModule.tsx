@@ -20,7 +20,11 @@ const cards: ICards[] = [
 ]
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
-  const { data, isLoading } = useQuery<IUser>(['user'], getMe)
+  const { data, isLoading } = useQuery<IUser>({
+      queryKey: ['user'],
+      queryFn: async () => await getMe()
+    }
+  )
 
   const cardsJSX = cards.map(({ title, text, href }) => (
     <Link key={title} href={href}>

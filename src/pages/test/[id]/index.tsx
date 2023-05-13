@@ -12,19 +12,19 @@ const Test: NextPage<
 > = ({ id }) => {
   const { data: userData, isLoading: userIsLoading } = useQuery<IUser>({
       queryKey: ['user'],
-      queryFn: async () => getMe()
+      queryFn: async () => await getMe()
     }
   )
   const { data, isLoading } = useQuery<IQuestions[]>({
       queryKey: ['test', id],
-      queryFn: async () => getQuestions(id)
+      queryFn: async () => await getQuestions(id)
     }
   )
 
   const showBtnLogin = !userData?.username && !userIsLoading
 
   if (!data && isLoading) return <Loader weight={'w-7'} height={'h-7'} center />
-  
+
   if (!data?.length && !isLoading) return (
     <NotFoundTest showBtnLogin={showBtnLogin} />
   )
@@ -37,7 +37,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient()
 
   try {
-    queryClient.fetchQuery(['test', id], async () => getQuestions(id))
+    queryClient.fetchQuery({
+      queryKey: ['test', id],
+      queryFn: async () => await getQuestions(id)
+    })
   } catch {
     return {
       notFound: true

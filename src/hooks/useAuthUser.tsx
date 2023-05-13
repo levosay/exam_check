@@ -26,7 +26,10 @@ export const useAuthUser = () => {
         if (data) {
           setCookie('authToken', data.token)
           setMesReq(mesReq)
-          queryClient.fetchQuery(['user'], getMe)
+          queryClient.fetchQuery({
+            queryKey: ['user'],
+            queryFn: async () => await getMe()
+          })
           toHomePath()
         }
       })

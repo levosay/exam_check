@@ -13,7 +13,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const token = getCookie('authToken')
   const { data, isLoading } = useQuery<IUser>({
       queryKey: ['user'],
-      queryFn: async () => getMe()
+      queryFn: async () => await getMe()
     }
   )
   const isShowBtnAccount = !(asPath.match('/signin') || asPath.match('/signup'))
