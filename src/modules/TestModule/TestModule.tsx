@@ -15,6 +15,7 @@ import {
 import { IHookFormValues, } from 'types/forms'
 import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
 import { postAnswers } from 'api/endpoints'
+import { useBlackRout } from '@/src/hooks'
 
 const initResultPoints = {
   show: false,
@@ -24,8 +25,10 @@ const initResultPoints = {
 export const TestModule: FunctionComponent<
   ITestModuleProps
 > = ({ questions }): JSX.Element => {
+  const { toHomePath } = useBlackRout()
   const [questionData, setQuestionData] = useState<IQuestionData>({})
   const [resultPoints, setResultPoints] = useState(initResultPoints)
+  const [loaded, setLoaded] = useState(false)
   const [progress, setProgress] = useState({
     current: 0,
     total: questions.length,
@@ -57,12 +60,16 @@ export const TestModule: FunctionComponent<
   }
 
   const sendQuestion = () => {
+    setLoaded(true)
     postAnswers(questionData)
       .then(data => {
         setResultPoints({
           show: true,
           points: data
         })
+      })
+      .finally(() => {
+        setLoaded(false)
       })
       .catch(error => {
         console.log(error)
@@ -71,6 +78,7 @@ export const TestModule: FunctionComponent<
 
   const closeModal = () => {
     setResultPoints(initResultPoints)
+    toHomePath()
   }
 
   return (
@@ -87,8 +95,9 @@ export const TestModule: FunctionComponent<
             {progress.finish &&
               <Button
                 className={'w-full min-md:animate-pulse mt-3 max-md:mb-0.5 max-md:bg-second-prime'}
-                title={'Отправить'}
+                title={loaded ? 'Отправка...' : 'Отправить'}
                 type={'button'}
+                disabled={loaded}
                 onClick={sendQuestion}
               />
             }
