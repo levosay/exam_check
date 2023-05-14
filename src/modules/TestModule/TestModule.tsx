@@ -94,7 +94,7 @@ export const TestModule: FunctionComponent<
             <ProgressExam current={progress.current} total={progress.total} />
             {progress.finish &&
               <Button
-                className={'w-full min-md:animate-pulse mt-3 max-md:mb-0.5 max-md:bg-second-prime'}
+                className={'w-full 2xl:animate-pulse mt-3 max-md:mb-0.5 max-md:bg-second-prime'}
                 title={loaded ? 'Отправка...' : 'Отправить'}
                 type={'button'}
                 disabled={loaded}
