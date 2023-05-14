@@ -16,15 +16,15 @@ export const AccountModule: FunctionComponent<
   return (
     <Container>
       <div className={'flex flex-col mb-2'}>
-        <InfoBlock filedName={'Ваш Логин'} filedValue={username} />
-        <InfoBlock filedName={'Ваша Роль'} filedValue={roles} />
+        <InfoBlock filedName={'Ваш логин'} filedValue={username} />
+        <InfoBlock filedName={'Ваша роль'} filedValue={roles} />
         <Button
           className={'h-4 mt-2'}
           title={'Выйти'}
           onClick={logOut}
         />
       </div>
-      <div className={'flex flex-col gap-2'}>{examsJSX}</div>
+      <div className={'flex flex-col gap-2 max-md:gap-1'}>{examsJSX}</div>
     </Container>
   )
 }

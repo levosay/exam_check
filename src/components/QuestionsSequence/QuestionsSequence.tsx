@@ -6,7 +6,7 @@ export const QuestionsSequence: FunctionComponent<
   TQuestionsSequenceProps
 > = ({ _id, question, answers }): JSX.Element => {
   const answersJSX = answers.map(title => (
-    <span key={title}>{title}</span>
+    <span key={title} className={'text-prim'}>{title}</span>
   ))
 
   return (

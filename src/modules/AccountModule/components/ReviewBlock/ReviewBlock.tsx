@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from 'react'
 import { TReviewBlockProps } from './ReviewBlock.d'
 import { ReviewItem } from './components'
 import { Icon } from 'components'
+import clsx from 'clsx'
 
 export const ReviewBlock: FunctionComponent<
   TReviewBlockProps
@@ -17,7 +18,11 @@ export const ReviewBlock: FunctionComponent<
       className={'flex flex-col bg-gray p-4 max-md:p-2 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
     >
       <div className={'pr-3'}>
-        <p>Количество баллов: {points}</p>
+        <p>Количество баллов: <span
+          className={clsx({
+            'text-second-prime': points < 40,
+            'text-prim': points >= 40,
+          })}>{points}</span></p>
         <p>Дата сдачи: {date}</p>
       </div>
       {open && (

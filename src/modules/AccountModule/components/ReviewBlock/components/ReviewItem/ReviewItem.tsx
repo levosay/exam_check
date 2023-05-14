@@ -36,13 +36,13 @@ export const ReviewItem: FunctionComponent<
       <div className={'flex flex-wrap gap-2 max-md:gap-1 ml-auto max-md:ml-0'}>
         <Button
           title={'Ваш ответ'}
-          className={'bg-gray border-0 hover:bg-gray shadow-lg hover:shadow-second-prime-light anim'}
+          className={'h-4 bg-gray border-0 hover:bg-gray shadow-lg hover:shadow-second-prime-light anim'}
           onClick={() => openModal('Ваш ответ', userAnswer)}
         />
         {!pass &&
           <Button
             title={'Правильный ответ'}
-            className={'bg-gray border-0 hover:bg-gray shadow-md hover:shadow-second-prime anim'}
+            className={'h-4 bg-gray border-0 hover:bg-gray shadow-md hover:shadow-second-prime anim'}
             onClick={() => openModal('Правильный ответ', passAnswer)}
           />
         }
@@ -52,8 +52,10 @@ export const ReviewItem: FunctionComponent<
         title={showHint.title}
         onClose={closeModal}
       >
-        <p>Вопрос: {title}</p>
-        <p>Ответ: {showHint.text}</p>
+        <p className={'border-b-2 mb-1'}>
+          <span className={'text-second-prime'}>Вопрос:</span> {title}
+        </p>
+        <p><span className={'text-prim'}>Ответ:</span> {showHint.text}</p>
       </Modal>
     </div>
   )
