@@ -34,7 +34,7 @@ const Test: NextPage<
     <NotFoundTest showBtnLogin={showBtnLogin} />
   )
 
-  return <TestModule questions={data} />
+  return <TestModule questions={data} topicId={id} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

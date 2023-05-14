@@ -10,6 +10,11 @@ export interface IQuestionData {
   [key: string]: IQuestionItem | Record<string, never>
 }
 
+export interface IQuestionBody {
+  topicId: number
+  questionData: IQuestionData
+}
+
 export interface IQuestionsProps {
   value: string | boolean
   obj: IQuestionData

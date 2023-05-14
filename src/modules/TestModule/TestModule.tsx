@@ -24,7 +24,7 @@ const initResultPoints = {
 
 export const TestModule: FunctionComponent<
   ITestModuleProps
-> = ({ questions }): JSX.Element => {
+> = ({ topicId, questions }): JSX.Element => {
   const { toHomePath } = useBlackRout()
   const [questionData, setQuestionData] = useState<IQuestionData>({})
   const [resultPoints, setResultPoints] = useState(initResultPoints)
@@ -61,7 +61,10 @@ export const TestModule: FunctionComponent<
 
   const sendQuestion = () => {
     setLoaded(true)
-    postAnswers(questionData)
+    postAnswers({
+      topicId,
+      questionData
+    })
       .then(data => {
         setResultPoints({
           show: true,

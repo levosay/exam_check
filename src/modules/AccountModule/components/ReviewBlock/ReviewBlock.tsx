@@ -6,7 +6,7 @@ import clsx from 'clsx'
 
 export const ReviewBlock: FunctionComponent<
   TReviewBlockProps
-> = ({ review, points, date }): JSX.Element => {
+> = ({ review, points, date, topic }): JSX.Element => {
   const [open, setOpen] = useState(false)
 
   const examsJSX = review.map((item) => (
@@ -18,6 +18,7 @@ export const ReviewBlock: FunctionComponent<
       className={'flex flex-col bg-gray p-4 max-md:p-2 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim relative'}
     >
       <div className={'pr-3'}>
+        {topic && <h3 className={'text-main-dark'}>Тема: {topic?.title}</h3>}
         <p>Количество баллов: <span
           className={clsx({
             'text-second-prime': points < 40,

@@ -6,11 +6,19 @@ export interface IReviewItem {
   pass: boolean
 }
 
+export interface IExamTopic {
+  _id: string
+  title: string
+  description: string
+  test: number
+}
+
 export interface IExamItem {
   _id: string
   review: IReviewItem[]
   date: string
   points: number
+  topic?: IExamTopic
 }
 
 export interface IUser {
