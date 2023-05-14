@@ -7,6 +7,26 @@ import clsx from 'clsx'
 export const Logo: FunctionComponent<
   ILogoProps
 > = ({ user, path, showLogoText }): JSX.Element => {
+  if (path === '/') {
+    return (
+      <div className={'flex gap-2'}>
+        <Icon
+          id={'book-open'}
+          color={'prim-light'}
+          height={'h-4'}
+          width={'w-4'}
+        />
+        <h2
+          className={clsx(`text-2xl text-prim`, {
+            'max-md:hidden': showLogoText
+          })}
+        >
+          Exam Check
+        </h2>
+      </div>
+    )
+  }
+
   return (
     <Link href={user ? '/' : path} className={'flex gap-2'}>
       <Icon
