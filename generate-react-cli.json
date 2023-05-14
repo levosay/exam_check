@@ -20,5 +20,6 @@
         "story": ".templates/component/TemplateName.stories.tsx"
       }
     }
-  }
+  },
+  "usesStyledComponents": true
 }
