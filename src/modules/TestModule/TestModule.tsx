@@ -15,7 +15,7 @@ import {
 import { IHookFormValues, } from 'types/forms'
 import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
 import { postAnswers } from 'api/endpoints'
-import { useBlackRout } from '@/src/hooks'
+import { useBlackRout } from 'hooks'
 
 const initResultPoints = {
   show: false,

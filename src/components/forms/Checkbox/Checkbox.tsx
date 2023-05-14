@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent } from 'react'
 import { ICheckboxProps } from './Checkbox.d'
 import { useFormContext } from 'react-hook-form'
 import { IHookFormValues } from 'types/forms/hook-form'
@@ -16,7 +16,6 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
     formState: { errors }
   } = useFormContext<IHookFormValues>()
   const fieldIsError = !!errors[hookFormProps.inputFormName]
-  const [state, setState] = useState(getValues(hookFormProps.inputFormName))
 
   return (
     <div
@@ -24,7 +23,7 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
       {labelMessage &&
         <label
           className={clsx('mr-2 text-prim', {
-            'text-second-prime-light': state
+            'text-second-prime-light': getValues(hookFormProps.inputFormName)
           })}
           htmlFor={hookFormProps.inputFormName}
         >
@@ -35,7 +34,6 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
         className={clsx('input-checkbox-default', {
           'input-error': fieldIsError,
         })}
-        onClick={() => setState(prev => !prev)}
         type={'checkbox'}
         disabled={disabled}
         {...register(hookFormProps.inputFormName)}
