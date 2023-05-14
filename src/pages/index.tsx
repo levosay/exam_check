@@ -1,25 +1,49 @@
-import { NextPage } from 'next'
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { HomeModule } from 'modules'
-import { useQuery } from '@tanstack/react-query'
-import { IUser } from 'api/models'
-import { getMe } from 'api/endpoints'
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
+import { IUser, TQuestionTopic } from 'api/models'
+import { getMe, questionTopic } from 'api/endpoints'
 import { Loader } from 'components'
 
-const Home: NextPage = () => {
-  const { data, isLoading } = useQuery<IUser>({
-      queryKey: ['user'],
-      queryFn: getMe
-    }
-  )
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = () => {
+  const { data: userData, isLoading: userIsLoading } = useQuery<IUser>({
+    queryKey: ['user'],
+    queryFn: getMe
+  })
+  const { data } = useQuery<TQuestionTopic>({
+    queryKey: ['them'],
+    queryFn: questionTopic
+  })
 
   return (
     <>
-      {isLoading || !data
+      {userIsLoading || !userData || !data
         ? <Loader weight={'w-7'} height={'h-7'} center />
-        : <HomeModule />
+        : <HomeModule data={data} />
       }
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const queryClient = new QueryClient()
+
+  try {
+    queryClient.fetchQuery({
+      queryKey: ['them'],
+      queryFn: questionTopic
+    })
+  } catch {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient)
+    }
+  }
 }
 
 export default Home

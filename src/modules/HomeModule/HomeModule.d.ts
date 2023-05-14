@@ -1,9 +1,5 @@
-export interface IHomeModuleProps {
-  message?: string
-}
+import { TQuestionTopic } from 'api/models'
 
-export interface ICards {
-  title: string
-  text: string
-  href: string
+export interface IHomeModuleProps {
+  data: TQuestionTopic
 }

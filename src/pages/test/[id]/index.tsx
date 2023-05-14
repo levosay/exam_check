@@ -5,7 +5,7 @@ import {
   NextPage
 } from 'next'
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
-import { getMe, getQuestions } from 'api/endpoints'
+import { getMe, getQuestions, questionTopic } from 'api/endpoints'
 import { TestModule } from 'modules'
 import { IQuestions } from 'api/models/questions'
 import { Loader, NotFoundTest } from 'components'
@@ -38,8 +38,14 @@ const Test: NextPage<
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const data = await questionTopic()
+
+  const paths = data.map(({ test }) => ({
+    params: { id: `${test}` }
+  }))
+
   return {
-    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+    paths: paths,
     fallback: 'blocking'
   }
 }
