@@ -1,10 +1,7 @@
 import { FunctionComponent } from 'react'
 import { ICards, IHomeModuleProps } from './HomeModule.d'
-import { Container, Loader } from 'components'
+import { Container } from 'components'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
-import { IUser } from 'api/models'
-import { getMe } from 'api/endpoints'
 
 const cards: ICards[] = [
   {
@@ -20,12 +17,6 @@ const cards: ICards[] = [
 ]
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element => {
-  const { data, isLoading } = useQuery<IUser>({
-      queryKey: ['user'],
-      queryFn: getMe
-    }
-  )
-
   const cardsJSX = cards.map(({ title, text, href }) => (
     <Link key={title} href={href}>
       <div
@@ -42,10 +33,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = (): JSX.Element =
       <div
         className={'flex items-start gap-3 max-md:gap-1 max-md:flex-col max-md:items-stretch'}
       >
-        {data?.username && !isLoading
-          ? cardsJSX
-          : <Loader weight={'w-7'} height={'h-7'} center />
-        }
+        {cardsJSX}
       </div>
     </Container>
   )

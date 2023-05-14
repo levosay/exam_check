@@ -8,24 +8,33 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
   hookFormProps,
   disabled,
   labelMessage,
+  value,
   ...props
 }): JSX.Element => {
   const {
     register,
     getValues,
+    setValue,
     formState: { errors }
   } = useFormContext<IHookFormValues>()
   const fieldIsError = !!errors[hookFormProps.inputFormName]
+
+  const onHandler = () => {
+    const currentValue = getValues(hookFormProps.inputFormName)
+    if (!currentValue) setValue(hookFormProps.inputFormName, value as string)
+    if (!!currentValue) setValue(hookFormProps.inputFormName, false)
+  }
 
   return (
     <div
       className={'flex justify-between items-center w-full'}>
       {labelMessage &&
         <label
-          className={clsx('mr-2 text-prim', {
-            'text-second-prime-light': getValues(hookFormProps.inputFormName)
+          className={clsx('mr-2 text-prim cursor-pointer hover:text-prim-light anim', {
+            'text-second-prime-light hover:text-second-prime': getValues(hookFormProps.inputFormName)
           })}
           htmlFor={hookFormProps.inputFormName}
+          onClick={onHandler}
         >
           {labelMessage}
         </label>
@@ -38,6 +47,7 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
         disabled={disabled}
         {...register(hookFormProps.inputFormName)}
         {...props}
+        value={value}
       />
     </div>
   )

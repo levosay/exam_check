@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { TAccountModuleProps } from './AccountModule.d'
 import { Button, Container } from 'components'
 import { InfoBlock, ReviewBlock } from './components'
-import { useAuthUser } from '@/src/hooks'
+import { useAuthUser } from 'hooks'
 
 export const AccountModule: FunctionComponent<
   TAccountModuleProps

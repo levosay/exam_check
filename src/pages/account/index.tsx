@@ -22,25 +22,4 @@ const Account: NextPage = () => {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const queryClient = new QueryClient()
-//
-//   try {
-//     queryClient.fetchQuery({
-//       queryKey: ['user'],
-//       queryFn: getMe
-//     })
-//   } catch {
-//     return {
-//       notFound: true,
-//     }
-//   }
-//
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient)
-//     }
-//   }
-// }
-
 export default Account
