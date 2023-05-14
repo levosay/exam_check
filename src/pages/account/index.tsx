@@ -1,13 +1,11 @@
-import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
+import { NextPage } from 'next'
 import { AccountModule } from 'modules'
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
 import { Loader } from 'components'
 
-const Account: NextPage<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = () => {
+const Account: NextPage = () => {
   const { data, isLoading } = useQuery<IUser>({
       queryKey: ['user'],
       queryFn: getMe
@@ -24,25 +22,25 @@ const Account: NextPage<
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const queryClient = new QueryClient()
-
-  try {
-    queryClient.fetchQuery({
-      queryKey: ['user'],
-      queryFn: getMe
-    })
-  } catch {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient)
-    }
-  }
-}
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const queryClient = new QueryClient()
+//
+//   try {
+//     queryClient.fetchQuery({
+//       queryKey: ['user'],
+//       queryFn: getMe
+//     })
+//   } catch {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient)
+//     }
+//   }
+// }
 
 export default Account
