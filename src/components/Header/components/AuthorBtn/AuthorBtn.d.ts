@@ -1,3 +1,4 @@
 export interface IAuthorBtnProps {
-  message?: string
+  username: string | undefined
+  isLoading: boolean
 }
