@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { IHeaderProps } from './Header.d'
 import { useBlackRout } from 'hooks'
 import { Container } from 'components'
@@ -8,13 +8,17 @@ import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
-  const { asPath } = useBlackRout()
+  const { asPath, toCustomRoute } = useBlackRout()
   const isShowBtnAccount = !(asPath.match('/signin') || asPath.match('/signup'))
   const { data, isLoading } = useQuery<IUser>({
     queryKey: ['user'],
     queryFn: getMe,
     refetchInterval: 5000
   })
+
+  useEffect(() => {
+    if (!data && !isLoading) toCustomRoute('/signin')
+  }, [])
 
   return (
     <Container>
