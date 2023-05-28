@@ -13,7 +13,7 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { data, isLoading } = useQuery<IUser>({
     queryKey: ['user'],
     queryFn: getMe,
-    refetchInterval: () => data ? 0 : 2000
+    refetchInterval: data => (data ? false : 2000)
   })
 
   useEffect(() => {
