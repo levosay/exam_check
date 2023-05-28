@@ -6,6 +6,7 @@ import { AuthorBtn, Logo } from './components'
 import { useQuery } from '@tanstack/react-query'
 import { IUser } from 'api/models'
 import { getMe } from 'api/endpoints'
+import { IError } from 'types'
 
 export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { asPath, toCustomRoute } = useBlackRout()
@@ -13,7 +14,13 @@ export const Header: FunctionComponent<IHeaderProps> = (): JSX.Element => {
   const { data, isLoading } = useQuery<IUser>({
     queryKey: ['user'],
     queryFn: getMe,
-    refetchInterval: data => (data ? false : 2000)
+    refetchInterval: data => (data ? false : 2000),
+    onError: e => {
+      const error = e as IError
+      if (error.response.status === 403) {
+        toCustomRoute('/signin')
+      }
+    }
   })
 
   useEffect(() => {
