@@ -9,7 +9,7 @@ export const Logo: FunctionComponent<
 > = ({ user, path, showLogoText }): JSX.Element => {
   if (path === '/') {
     return (
-      <div className={'flex gap-2'}>
+      <div className={'flex gap-2 cursor-default'}>
         <Icon
           id={'book-open'}
           color={'prim-light'}

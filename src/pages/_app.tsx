@@ -1,18 +1,18 @@
 import 'assets/styles/main.scss'
 import type { AppProps } from 'next/app'
 import { Base } from 'layouts'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { wrapper } from 'store'
+import { Provider } from 'react-redux'
 
-export default function App({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient()
-
+const App = ({ Component, pageProps }: AppProps) => {
+  const { store, props } = wrapper.useWrappedStore(pageProps)
   return (
-    <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
       <Base>
-        <Component {...pageProps} />
+        <Component {...props.pageProps} />
       </Base>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    </Provider>
   )
 }
+
+export default App

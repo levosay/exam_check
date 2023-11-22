@@ -1,9 +1,10 @@
-import { getMe, postSignin, postSignup } from 'api/endpoints'
+import { postSignin, postSignup } from 'api/endpoints'
 import { deleteCookie, setCookie } from 'cookies-next'
 import { useState } from 'react'
 import { useBlackRout } from 'hooks'
 import { TSigninBody, TSignupBody } from 'api/models'
-import { useQueryClient } from '@tanstack/react-query'
+import { clearUser, meThunk } from '@/src/store/user'
+import { useAppDispatch } from '@/src/store/hooks'
 
 interface IInitMesRequest {
   message: string
@@ -12,24 +13,21 @@ interface IInitMesRequest {
 
 const initMesReq: IInitMesRequest = {
   message: '',
-  error: ''
+  error: '',
 }
 
 export const useAuthUser = () => {
   const [mesReq, setMesReq] = useState<IInitMesRequest>(initMesReq)
   const { toHomePath, toCustomRoute } = useBlackRout()
-  const queryClient = useQueryClient()
+  const dispatch = useAppDispatch()
 
   const signinWithCookies = (body: TSigninBody) => {
     postSignin(body)
       .then(data => {
-        if (data) {
+        if (data.token) {
           setCookie('authToken', data.token)
           setMesReq(mesReq)
-          queryClient.fetchQuery({
-            queryKey: ['user'],
-            queryFn: getMe
-          })
+          dispatch(meThunk())
           toHomePath()
         }
       })
@@ -51,6 +49,7 @@ export const useAuthUser = () => {
 
   const logOut = () => {
     deleteCookie('authToken', { path: '/' })
+    dispatch(clearUser())
     toCustomRoute('/signin')
   }
 
@@ -58,6 +57,6 @@ export const useAuthUser = () => {
     signinWithCookies,
     signupWithRoute,
     logOut,
-    mesReq
+    mesReq,
   }
 }

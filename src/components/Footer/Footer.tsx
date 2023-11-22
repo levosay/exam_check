@@ -7,8 +7,8 @@ export const Footer: FunctionComponent<IFooterProps> = (): JSX.Element => {
     <Container tailClass={'mt-auto'}>
       <div className={'flex justify-center py-4'}>
         <h4>
-          Учебный проект Левшина Олега
-          <span className={'text-second-prime'}> 4 курс</span>
+          Дипломный проект Левшина Олега
+          <span className={'text-second-prime'}> 5 курс</span>
         </h4>
       </div>
     </Container>
