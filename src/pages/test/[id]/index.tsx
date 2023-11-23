@@ -24,20 +24,19 @@ const Test: NextPage<
     list: questionData,
     loading: questionLoading,
   } = useAppSelector(questionStore)
-
   const showBtnLogin = !userData?.username && !userLoading
 
-  if (questionLoading) {
+  if (userLoading || questionLoading) {
     return <Loader weight={'w-7'} height={'h-7'} center />
-  }
-
-  if (!questionData?.length && !questionLoading) {
+  } else if (!questionData?.length && !questionLoading) {
     return (
       <NotFoundTest showBtnLogin={showBtnLogin} />
     )
   }
 
-  return questionData && <TestModule questions={questionData} topicId={id} />
+  return (userData && questionData) && (
+    <TestModule questions={questionData} topicId={id} />
+  )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

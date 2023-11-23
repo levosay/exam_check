@@ -15,9 +15,9 @@ const Home = () => {
 
   return (
     <>
-      {userLoading && themeLoading &&
-        <Loader weight={'w-7'} height={'h-7'} center />}
-      {list && <HomeModule data={list} />}
+      {(userLoading || themeLoading) ?
+        <Loader weight={'w-7'} height={'h-7'} center />
+        : list && <HomeModule data={list} />}
     </>
   )
 }

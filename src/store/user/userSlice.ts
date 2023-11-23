@@ -33,6 +33,9 @@ export const userSlice = createSlice({
         state.user = action.payload
         state.loading = false
       })
+      .addCase(meThunk.rejected, (state) => {
+        state.loading = false
+      })
   },
 })
 
