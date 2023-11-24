@@ -18,7 +18,7 @@ export const ReviewItem: FunctionComponent<
     setShowHint({
       show: true,
       title,
-      text
+      text,
     })
   }
 
@@ -30,10 +30,11 @@ export const ReviewItem: FunctionComponent<
     <div
       className={clsx('flex max-md:flex-col items-center max-md:items-start gap-2 max-md:gap-1 px-2 py-1 rounded-2xl', {
         'bg-prim-light': pass,
-        'bg-second-prime-light': !pass
+        'bg-second-prime-light': !pass,
       })}>
       <span>{title}</span>
-      <div className={'flex flex-wrap gap-2 max-md:gap-1 ml-auto max-md:ml-0'}>
+      <div
+        className={'flex flex-wrap gap-2 min-w-300 max-md:min-w-200 max-md:gap-1 ml-auto max-md:ml-0'}>
         <Button
           title={'Ваш ответ'}
           className={'h-4 bg-gray border-0 hover:bg-gray shadow-lg hover:shadow-second-prime-light anim'}

@@ -10,16 +10,16 @@ import {
   ProgressExam,
   QuestionsChoose,
   QuestionsSequence,
-  QuestionsText
+  QuestionsText,
 } from 'components'
-import { IHookFormValues, } from 'types/forms'
+import { IHookFormValues } from 'types/forms'
 import { getProgress, IQuestionData, prepareQuestionsData } from 'utils/helpers'
 import { postAnswers } from 'api/endpoints'
 import { useBlackRout } from 'hooks'
 
 const initResultPoints = {
   show: false,
-  points: 0
+  points: 0,
 }
 
 export const TestModule: FunctionComponent<
@@ -32,7 +32,7 @@ export const TestModule: FunctionComponent<
   const [progress, setProgress] = useState({
     current: 0,
     total: questions.length,
-    finish: false
+    finish: false,
   })
 
   const questionsJSX = questions.map((item) => {
@@ -47,6 +47,7 @@ export const TestModule: FunctionComponent<
   })
 
   const submit = (data: IHookFormValues) => {
+    console.log('submit ', data)
     setProgress(prevState => {
       const progress = getProgress(data)
 
@@ -63,12 +64,12 @@ export const TestModule: FunctionComponent<
     setLoaded(true)
     postAnswers({
       topicId,
-      questionData
+      questionData,
     })
       .then(data => {
         setResultPoints({
           show: true,
-          points: data
+          points: data,
         })
       })
       .finally(() => {

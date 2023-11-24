@@ -36,6 +36,10 @@
     @apply w-2 h-2 cursor-pointer
   }
 
+  .input-radio-default {
+    @apply w-2 h-2 cursor-pointer hover:bg-second-prime-light focus:ring-0
+  }
+
   .input-error {
     @apply border-second-prime placeholder-second-prime-light focus:ring-1
   }

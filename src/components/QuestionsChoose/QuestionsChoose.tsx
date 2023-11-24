@@ -7,15 +7,15 @@ export const QuestionsChoose: FunctionComponent<
 > = ({
   _id,
   question,
-  answers
+  answers,
 }): JSX.Element => {
-  const answersJSX = answers.map((item, index) => (
-    <Form.Checkbox
+  const answersJSX = answers.map((item) => (
+    <Form.Radio
       key={_id + item}
       value={item}
       labelMessage={item}
       hookFormProps={{
-        inputFormName: `check_${_id}_${index}`
+        inputFormName: `radio_${_id}_`,
       }}
     />
   ))

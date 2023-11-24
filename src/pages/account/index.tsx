@@ -1,14 +1,21 @@
 import { NextPage } from 'next'
 import { AccountModule } from 'modules'
 import { Loader } from 'components'
-import { useAppSelector, userStore } from '@/src/store/hooks'
+import { useAppDispatch, useAppSelector, userStore } from '@/src/store/hooks'
+import { useEffect } from 'react'
+import { meThunk } from '@/src/store/user'
 
 const Account: NextPage = () => {
-  const { user, loading } = useAppSelector(userStore)
+  const { user } = useAppSelector(userStore)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(meThunk())
+  }, [])
 
   return (
     <>
-      {loading || !user
+      {!user
         ? <Loader weight={'w-7'} height={'h-7'} center />
         : <AccountModule {...user} />
       }

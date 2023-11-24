@@ -15,7 +15,7 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
     register,
     getValues,
     setValue,
-    formState: { errors }
+    formState: { errors },
   } = useFormContext<IHookFormValues>()
   const fieldIsError = !!errors[hookFormProps.inputFormName]
 
@@ -31,7 +31,7 @@ export const Checkbox: FunctionComponent<ICheckboxProps> = ({
       {labelMessage &&
         <label
           className={clsx('mr-2 text-prim cursor-pointer hover:text-prim-light anim', {
-            'text-second-prime-light hover:text-second-prime': getValues(hookFormProps.inputFormName)
+            'text-second-prime-light hover:text-second-prime': getValues(hookFormProps.inputFormName),
           })}
           htmlFor={hookFormProps.inputFormName}
           onClick={onHandler}

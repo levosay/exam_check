@@ -1,4 +1,4 @@
-import { IHookFormValues, } from 'types/forms'
+import { IHookFormValues } from 'types/forms'
 
 export interface IQuestionItem {
   id: string
@@ -25,9 +25,11 @@ const regQuestionsId = new RegExp(/_[a-z|0-9]*_/)
 // const regAnswerId = new RegExp(/_[0-9]$/)
 const regTypeCheck = new RegExp(/^check/)
 const regTypeText = new RegExp(/^text/)
+const regTypeRadio = new RegExp(/^radio/)
 
 const matchQuestionsTypeCheck = (string: string) => regTypeCheck.test(string)
 const matchQuestionsTypeText = (string: string) => regTypeText.test(string)
+const matchQuestionsTypeRadio = (string: string) => regTypeRadio.test(string)
 
 const getQuestionsId = (string: string) => {
   return string.match(regQuestionsId)?.shift()?.replace(/^_/g, '')
@@ -40,7 +42,8 @@ const getQuestionsId = (string: string) => {
 
 const getQuestionsType = (string: string) => {
   return string.match(regTypeCheck)
-    ?.shift() || string.match(regTypeText)?.shift() || ''
+    ?.shift() || string.match(regTypeText)
+    ?.shift() || string.match(regTypeRadio)?.shift() || ''
 }
 
 const createQuestionsCheck = ({ obj, key, value }: IQuestionsProps) => {
@@ -80,7 +83,7 @@ export const prepareQuestionsData = (data: IHookFormValues) => {
       }
     }
 
-    if (matchQuestionsTypeText(key)) {
+    if (matchQuestionsTypeText(key) || matchQuestionsTypeRadio(key)) {
       createQuestionsText({ obj, key, value: data[validKey] as string })
     }
   }

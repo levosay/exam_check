@@ -16,9 +16,3 @@ export type TColor =
 export interface Params extends ParsedUrlQuery {
   id: string
 }
-
-export interface IError {
-  response: {
-    status: number
-  }
-}
