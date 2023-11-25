@@ -10,14 +10,14 @@ import { GetStaticProps } from 'next'
 import { wrapper } from '@/src/store'
 
 const Home = () => {
-  const { loading: userLoading } = useAppSelector(userStore)
+  const { user, loading: userLoading } = useAppSelector(userStore)
   const { list, loading: themeLoading } = useAppSelector(themeStore)
 
   return (
     <>
       {(userLoading || themeLoading) ?
         <Loader weight={'w-7'} height={'h-7'} center />
-        : list && <HomeModule data={list} />}
+        : user && list && <HomeModule data={list} />}
     </>
   )
 }
