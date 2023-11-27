@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useMemo, useState } from 'react'
 import { ITestModuleProps } from './TestModule.d'
 import { QuestionTypes } from 'api/models/questions'
 import {
@@ -8,8 +8,9 @@ import {
   Modal,
   NextLink,
   ProgressExam,
-  QuestionsChoose,
-  QuestionsSequence,
+  QuestionsCheckbox,
+  QuestionsRadio,
+  // QuestionsSequence,
   QuestionsText,
 } from 'components'
 import { IHookFormValues } from 'types/forms'
@@ -35,19 +36,22 @@ export const TestModule: FunctionComponent<
     finish: false,
   })
 
-  const questionsJSX = questions.map((item) => {
-    switch (item.type) {
-      case QuestionTypes.checkbox:
-        return <QuestionsChoose key={item._id} {...item} />
-      case QuestionTypes.text:
-        return <QuestionsText key={item._id} {...item} />
-      case QuestionTypes.sequence:
-        return <QuestionsSequence key={item._id} {...item} />
-    }
-  })
+  const questionsJSX = useMemo(() => (
+    questions.map((item) => {
+      switch (item.type) {
+        case QuestionTypes.radio:
+          return <QuestionsRadio key={item._id} {...item} />
+        case QuestionTypes.checkbox:
+          return <QuestionsCheckbox key={item._id} {...item} />
+        case QuestionTypes.text:
+          return <QuestionsText key={item._id} {...item} />
+        // case QuestionTypes.radio:
+        //   return <QuestionsSequence key={item._id} {...item} />
+      }
+    })
+  ), [questions])
 
   const submit = (data: IHookFormValues) => {
-    console.log('submit ', data)
     setProgress(prevState => {
       const progress = getProgress(data)
 

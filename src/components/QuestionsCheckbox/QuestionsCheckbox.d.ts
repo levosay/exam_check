@@ -1,3 +1,3 @@
 import { IQuestionCheckbox } from 'api/models/questions'
 
-export type TQuestionsChooseProps = IQuestionCheckbox
+export type TQuestionsCheckboxProps = IQuestionCheckbox

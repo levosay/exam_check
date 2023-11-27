@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react'
-import { TQuestionsChooseProps } from './QuestionsChoose.d'
+import { TQuestionsRadioProps } from './QuestionsRadio.d'
 import { Form } from 'components'
 
-export const QuestionsChoose: FunctionComponent<
-  TQuestionsChooseProps
+export const QuestionsRadio: FunctionComponent<
+  TQuestionsRadioProps
 > = ({
   _id,
   question,
