@@ -22,7 +22,7 @@ export interface IExamItem {
 }
 
 export interface IUser {
-  roles: string
+  roles: string[]
   username: string
   __v: number
   _id: string

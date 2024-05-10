@@ -7,5 +7,7 @@ export interface IHookFormValues {
 
   [key: `radio_${string}_`]: string | null
 
+  [key: `select_${string}_`]: string
+
   [key: `text_${string}_`]: string
 }

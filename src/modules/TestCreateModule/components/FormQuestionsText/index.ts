@@ -1,1 +1,1 @@
-export * from './FormQuestions'
+export * from './FormQuestionsText'

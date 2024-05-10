@@ -10,7 +10,7 @@ import {
   ProgressExam,
   QuestionsCheckbox,
   QuestionsRadio,
-  // QuestionsSequence,
+  QuestionsSequence,
   QuestionsText,
 } from 'components'
 import { IHookFormValues } from 'types/forms'
@@ -45,8 +45,8 @@ export const TestModule: FunctionComponent<
           return <QuestionsCheckbox key={item._id} {...item} />
         case QuestionTypes.text:
           return <QuestionsText key={item._id} {...item} />
-        // case QuestionTypes.radio:
-        //   return <QuestionsSequence key={item._id} {...item} />
+        case QuestionTypes.sequence:
+          return <QuestionsSequence key={item._id} {...item} />
       }
     })
   ), [questions])

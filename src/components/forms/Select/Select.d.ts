@@ -1,3 +1,9 @@
+import { IHookFormProps, SelectOption } from '@/src/types/forms'
+
 export interface ISelectProps {
-  message?: string
+  selectedOption?: SelectOption
+  options: SelectOption[]
+  hookFormProps: IHookFormProps
+  labelMessage?: string
+  placeholder?: string
 }

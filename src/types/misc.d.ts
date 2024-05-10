@@ -16,3 +16,9 @@ export type TColor =
 export interface Params extends ParsedUrlQuery {
   id: string
 }
+
+
+export enum ROLES {
+  ADMIN = 'ADMIN',
+  USER = 'USER'
+}

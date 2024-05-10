@@ -4,6 +4,7 @@ import { FormProvider, useForm, UseFormWatch } from 'react-hook-form'
 import { Input } from '../Input'
 import { Checkbox } from '../Checkbox'
 import { Radio } from '../Radio'
+import { Select } from '../Select'
 import { ErrorField } from '../ErrorField'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { IHookFormValues } from 'types/forms'
@@ -13,10 +14,10 @@ export const Form: FunctionComponent<PropsWithChildren<IFormProps>>
   children,
   onSubmit,
   schema,
-  autoSubmit
+  autoSubmit,
 }): JSX.Element => {
   const methods = useForm<IHookFormValues>({
-    resolver: schema && yupResolver(schema)
+    resolver: schema && yupResolver(schema),
   })
 
   useEffect(() => {
@@ -43,3 +44,4 @@ Form.Input = Input
 Form.Checkbox = Checkbox
 Form.Radio = Radio
 Form.ErrorField = ErrorField
+Form.Select = Select

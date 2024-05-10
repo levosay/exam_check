@@ -1,5 +1,4 @@
-export interface DropdownOptions {
+export interface SelectOption {
   value: string
   label: string
-  icon?: string
 }

@@ -1,7 +1,8 @@
 export enum QuestionTypes {
   checkbox = 'checkbox',
   text = 'text',
-  radio = 'radio'
+  radio = 'radio',
+  sequence = 'sequence'
 }
 
 export interface IQuestionDefault {
@@ -28,7 +29,7 @@ export interface IQuestionText extends IQuestionDefault {
 }
 
 export interface IQuestionSequence extends IQuestionDefault {
-  type: QuestionTypes.radio
+  type: QuestionTypes.sequence
   question: string
   answers: string[]
 }

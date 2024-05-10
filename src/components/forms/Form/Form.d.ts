@@ -3,6 +3,7 @@ import { Input } from '../Input'
 import { Checkbox } from '../Checkbox'
 import { Radio } from '../Radio'
 import { ErrorField } from '../ErrorField'
+import { Select } from '../Select'
 
 export interface IFormProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,4 +17,5 @@ export interface FormExtensions {
   Checkbox: typeof Checkbox
   Radio: typeof Radio
   ErrorField: typeof ErrorField
+  Select: typeof Select
 }
