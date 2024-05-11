@@ -3,3 +3,4 @@ export type TIcons =
   | 'chevron-down'
   | 'chevron-up'
   | 'cross'
+  | 'plus'

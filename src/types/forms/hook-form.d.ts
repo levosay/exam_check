@@ -2,6 +2,8 @@ export interface IHookFormValues {
   username?: string
   password?: string
   passwordRepeat?: string
+  title?: string
+  answer?: string
 
   [key: `check_${string}_${string}`]: boolean
 
@@ -9,5 +11,5 @@ export interface IHookFormValues {
 
   [key: `select_${string}_`]: string
 
-  [key: `text_${string}_`]: string
+  [key: `text_${string}_${string}`]: string
 }

@@ -1,9 +1,10 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, PropsWithChildren } from 'react'
 import { IButtonProps } from './Button.d'
 
-export const Button: FunctionComponent<IButtonProps> = ({
+export const Button: FunctionComponent<PropsWithChildren<IButtonProps>> = ({
   title,
   className,
+  children,
   ...props
 }): JSX.Element => {
   return (
@@ -11,7 +12,8 @@ export const Button: FunctionComponent<IButtonProps> = ({
       className={className}
       {...props}
     >
-      {title}
+      {title && title}
+      {children && children}
     </button>
   )
 }

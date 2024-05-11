@@ -1,8 +1,13 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { ITestCreateModuleProps } from './TestCreateModule.d'
-import { Button, Container, Form, Modal } from 'components'
-import { QuestionsPreview } from '@/src/modules/TestCreateModule/components'
+import { Button, Container, Form, Icon } from 'components'
+import {
+  FormQuestionsText,
+} from '@/src/modules/TestCreateModule/components'
 import { IHookFormValues } from '@/src/types/forms'
+import { themeStore, useAppSelector } from '@/src/store/hooks'
+import { postQuestions } from '@/src/api/endpoints'
+import { useBlackRout } from '@/src/hooks'
 
 export interface QuestionText {
   type: string
@@ -13,18 +18,9 @@ export interface QuestionText {
   key: string
 }
 
-export type QuestionItem = Omit<QuestionText, 'test' | 'type'>
-
-const themeOptions = [
-  {
-    value: '1',
-    label: '1111',
-  },
-  {
-    value: '2',
-    label: '2222',
-  },
-]
+export type EditableState = Pick<QuestionText, 'position'> & {
+  flag: boolean
+}
 
 const defaultQuestionsState: QuestionText = {
   key: '',
@@ -38,41 +34,31 @@ const defaultQuestionsState: QuestionText = {
 export const TestCreateModule: FunctionComponent<
   ITestCreateModuleProps
 > = (): JSX.Element => {
-  const [questions, setQuestions] = useState<QuestionText>(defaultQuestionsState)
-  const [open, setOpen] = useState(false)
+  const { toCustomRoute } = useBlackRout()
+  const [questions, setQuestions] = useState<QuestionText[]>([defaultQuestionsState])
   const [themeNumber, setThemeNumber] = useState<Pick<QuestionText, 'test'>>({
     test: 0,
   })
+  const [mainIsEditable, setMainIsEditable] = useState<EditableState[]>([])
+  const { list: themeList } = useAppSelector(themeStore)
+  const themeOptions = themeList?.map(theme => ({
+    label: theme.title,
+    value: `${theme.test}`,
+  }))
 
+  useEffect(() => {
+    setQuestions(prev => prev.map(question => ({
+      ...question,
+      test: themeNumber.test,
+    })))
+  }, [themeNumber.test])
 
-  const getFormQuestion = () => {
-    return (
-      <Form onSubmit={addQuestion}>
-        <Form.Input
-          hookFormProps={{
-            inputFormName: 'text_title_',
-          }}
-          labelMessage={'Вопрос'}
-          placeholder={'Введите текст вопроса'}
-        />
-        <Form.Input
-          hookFormProps={{
-            inputFormName: 'text_answer_',
-          }}
-          labelMessage={'Ответ'}
-          placeholder={'Введите текст вопроса'}
-        />
-        <Button title={'Сохранить'} />
-
-      </Form>
-    )
-  }
-
-  const addQuestion = (question) => {
-  }
-
-  const toggleModal = () => {
-    setOpen(!open)
+  const handlerEditable = (state: EditableState) => {
+    if (state.flag) {
+      setMainIsEditable(prev => [...prev.filter(item => item.position !== state.position), state])
+    } else {
+      setMainIsEditable(prev => prev.filter(item => item.position !== state.position))
+    }
   }
 
   const onSelectTheme = (data: IHookFormValues) => {
@@ -81,26 +67,81 @@ export const TestCreateModule: FunctionComponent<
     })
   }
 
+  const addFormQuestion = () => {
+    setQuestions(prev => ([...prev, {
+      ...defaultQuestionsState,
+      ...themeNumber,
+      position: questions.length + 1,
+    }]))
+  }
+
+  const sveQuestion = (question: QuestionText) => {
+    const newQuestions = questions.map(stateQuestion => {
+      if (stateQuestion.position === question.position) {
+        return question
+      }
+      return stateQuestion
+    })
+
+    setQuestions(newQuestions)
+  }
+
+  const submitQuestions = async () => {
+    try {
+      await postQuestions({
+        test: themeNumber.test,
+        questions,
+      })
+
+      toCustomRoute(`/test/${themeNumber.test}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Container>
-      <div className={'flex flex-col'}>
-        <Form onSubmit={onSelectTheme} autoSubmit>
-          <Form.Select
-            hookFormProps={{
-              inputFormName: 'select_theme_',
-            }}
-            options={themeOptions}
-            placeholder={'Выберите тему'}
-          />
-        </Form>
-
-        <Button
-          title={'Добавить вопрос'}
-          onClick={toggleModal}
-          className={'h-4 min-w-100 ml-auto'}
-        />
-
-        <QuestionsPreview list={questions} />
+      <div className={'flex flex-col gap-2'}>
+        <div className={'flex justify-between items-center'}>
+          <Form onSubmit={onSelectTheme} autoSubmit>
+            <Form.Select
+              hookFormProps={{
+                inputFormName: 'select_theme_',
+              }}
+              options={themeOptions ?? []}
+              placeholder={'Выберите тему'}
+            />
+          </Form>
+          {themeNumber.test !== 0 && !!questions.length && (
+            <Button
+              disabled={!!mainIsEditable.length}
+              className={'h-4 min-w-100 ml-auto disabled:cursor-default disabled:text-second-prime'}
+              title={'Отправить'}
+              onClick={submitQuestions}
+            />
+          )}
+        </div>
+        {themeNumber.test !== 0 && (
+          <div className={'flex flex-col gap-2'}>
+            {questions.map(question => (
+              <FormQuestionsText
+                key={question.position}
+                position={question.position}
+                test={themeNumber.test}
+                handlerEditable={handlerEditable}
+                onSave={sveQuestion}
+              />
+            ))}
+          </div>
+        )}
+        {themeNumber.test !== 0 && (
+          <Button
+            onClick={addFormQuestion}
+            className={'mx-auto'}
+          >
+            <Icon id={'plus'} height={'h-2'} width={'w-3'} />
+          </Button>
+        )}
       </div>
     </Container>
   )
