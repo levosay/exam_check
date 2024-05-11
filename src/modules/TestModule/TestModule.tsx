@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo, useState } from 'react'
-import { ITestModuleProps } from './TestModule.d'
+import { ITestModuleProps, TimeState } from './TestModule.d'
 import { QuestionTypes } from 'api/models/questions'
 import {
   Button,
@@ -35,6 +35,11 @@ export const TestModule: FunctionComponent<
     total: questions.length,
     finish: false,
   })
+  const [time, setTime] = useState<TimeState>({
+    hours: 0,
+    min: 0,
+    sec: 0,
+  })
 
   const questionsJSX = useMemo(() => (
     questions.map((item) => {
@@ -69,6 +74,7 @@ export const TestModule: FunctionComponent<
     postAnswers({
       topicId,
       questionData,
+      time: `часов: ${time.hours} | минут: ${time.min} | сукунд: ${time.sec}`,
     })
       .then(data => {
         setResultPoints({
@@ -99,7 +105,12 @@ export const TestModule: FunctionComponent<
           </div>
           <div
             className={'sticky max-md:fixed w-1/4 max-md:w-full top-8 max-md:top-auto max-md:bottom-0 max-md:left-0 flex flex-col max-md:flex-col-reverse'}>
-            <ProgressExam current={progress.current} total={progress.total} />
+            <ProgressExam
+              timeState={time}
+              setTimeState={setTime}
+              current={progress.current}
+              total={progress.total}
+            />
             {progress.finish &&
               <Button
                 className={'w-full 2xl:animate-pulse mt-3 max-md:mb-0.5 max-md:bg-second-prime'}

@@ -1,17 +1,11 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect } from 'react'
 import { ITimerProps } from './Timer.d'
 
 export const Timer: FunctionComponent<
   ITimerProps
-> = (): JSX.Element => {
-  const [time, setTime] = useState({
-    hours: 0,
-    min: 0,
-    sec: 0
-  })
-
-  const minText = time.min >= 10 ? time.min : `0${time.min}`
-  const secText = time.sec >= 10 ? time.sec : `0${time.sec}`
+> = ({ timeState, setTimeState }): JSX.Element => {
+  const minText = timeState.min >= 10 ? timeState.min : `0${timeState.min}`
+  const secText = timeState.sec >= 10 ? timeState.sec : `0${timeState.sec}`
 
   const createTimer = () => {
     const now = +new Date()
@@ -20,7 +14,7 @@ export const Timer: FunctionComponent<
       const hours = Math.floor(diff / 1000 / 60 / 60 % 24)
       const min = Math.floor(diff / 1000 / 60 % 60)
       const sec = Math.floor(diff / 1000 % 60)
-      setTime({ hours, min, sec })
+      setTimeState({ hours, min, sec })
     }
   }
 
@@ -34,5 +28,5 @@ export const Timer: FunctionComponent<
     }
   }, [])
 
-  return <span>{time.hours}:{minText}:{secText}</span>
+  return <span>{timeState.hours}:{minText}:{secText}</span>
 }

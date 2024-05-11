@@ -13,6 +13,7 @@ export interface IQuestionData {
 export interface IQuestionBody {
   topicId: number
   questionData: IQuestionData
+  time: string
 }
 
 export interface IQuestionsProps {

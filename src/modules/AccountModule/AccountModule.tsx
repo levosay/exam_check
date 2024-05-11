@@ -49,7 +49,11 @@ export const AccountModule: FunctionComponent<
         <InfoBlock filedName={'Ваш логин'} filedValue={username} />
         <InfoBlock filedName={'Ваша роль'} filedValue={roles.join('/')} />
       </div>
-      <div className={'flex flex-col gap-2 max-md:gap-1'}>{examsJSX}</div>
+      <div
+        className={'flex flex-col-reverse gap-2 max-md:gap-1'}
+      >
+        {examsJSX}
+      </div>
     </Container>
   )
 }
