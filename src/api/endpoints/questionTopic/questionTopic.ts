@@ -1,7 +1,14 @@
 import { apiExam } from 'api'
-import { TQuestionTopic } from 'api/models'
+import { IQuestionTopicItem, TQuestionTopic } from 'api/models'
 
-export const questionTopic = async () => {
+type PostQuestionTopic = IQuestionTopicItem
+
+export const getQuestionTopic = async () => {
   const { data } = await apiExam.get<TQuestionTopic>('/topic')
+  return data
+}
+
+export const postQuestionTopic = async (body: PostQuestionTopic) => {
+  const { data } = await apiExam.post('/topic', body)
   return data
 }

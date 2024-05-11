@@ -4,7 +4,7 @@ import { Container } from 'components'
 import Link from 'next/link'
 
 export const HomeModule: FunctionComponent<IHomeModuleProps> = ({
-  data
+  data,
 }): JSX.Element => {
 
   const cardsJSX = data.map(({ title, description, test }) => (
@@ -13,7 +13,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = ({
         className={'flex flex-col gap-2 max-md:gap-1 w-300 max-md:w-full bg-gray p-4 max-md:p-2 text-main-dark rounded-2xl shadow-lg hover:shadow-second-prime-light anim'}
       >
         <h3 className={'text-second-prime text-2xl'}>{title}</h3>
-        <p>{description}</p>
+        <p className={'text-ellipsis'}>{description}</p>
       </div>
     </Link>
   ))
@@ -21,7 +21,7 @@ export const HomeModule: FunctionComponent<IHomeModuleProps> = ({
   return (
     <Container>
       <div
-        className={'flex items-start gap-3 max-md:gap-1 max-md:flex-col max-md:items-stretch'}
+        className={'flex flex-wrap items-start gap-3 max-md:gap-1 max-md:flex-col max-md:items-stretch'}
       >
         {cardsJSX}
       </div>

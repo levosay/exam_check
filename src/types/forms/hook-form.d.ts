@@ -4,6 +4,7 @@ export interface IHookFormValues {
   passwordRepeat?: string
   title?: string
   answer?: string
+  description?: string
 
   [key: `check_${string}_${string}`]: boolean
 

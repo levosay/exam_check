@@ -116,7 +116,7 @@ export const TestCreateModule: FunctionComponent<
             <Button
               disabled={!!mainIsEditable.length}
               className={'h-4 min-w-100 ml-auto disabled:cursor-default disabled:text-second-prime'}
-              title={'Отправить'}
+              title={'Создать'}
               onClick={submitQuestions}
             />
           )}

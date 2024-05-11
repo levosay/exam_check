@@ -13,7 +13,7 @@ import {
   userStore,
 } from '@/src/store/hooks'
 import { questionsThunk } from '@/src/store/question'
-import { questionTopic } from '@/src/api/endpoints'
+import { getQuestionTopic } from '@/src/api/endpoints'
 import { wrapper } from '@/src/store'
 
 const Test: NextPage<
@@ -40,7 +40,7 @@ const Test: NextPage<
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await questionTopic()
+  const data = await getQuestionTopic()
 
   const paths = data.map(({ test }) => ({
     params: { id: `${test}` },
