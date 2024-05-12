@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { ITestCreateModuleProps } from './TestCreateModule.d'
 import { Button, Container, Form, Icon } from 'components'
 import {
@@ -46,6 +46,20 @@ export const TestCreateModule: FunctionComponent<
     value: `${theme.test}`,
   }))
 
+  const submitBtn = useMemo(() => {
+    if (themeNumber.test !== 0 && !!questions.length && mainIsEditable.length === 0) {
+      return (
+        <Button
+          className={'h-4 min-w-100 ml-auto disabled:cursor-default disabled:text-second-prime'}
+          title={'Создать'}
+          onClick={submitQuestions}
+        />
+      )
+    }
+
+    return <></>
+  }, [questions, mainIsEditable])
+
   useEffect(() => {
     setQuestions(prev => prev.map(question => ({
       ...question,
@@ -86,7 +100,7 @@ export const TestCreateModule: FunctionComponent<
     setQuestions(newQuestions)
   }
 
-  const submitQuestions = async () => {
+  async function submitQuestions() {
     try {
       await postQuestions({
         test: themeNumber.test,
@@ -112,14 +126,7 @@ export const TestCreateModule: FunctionComponent<
               placeholder={'Выберите тему'}
             />
           </Form>
-          {themeNumber.test !== 0 && !!questions.length && (
-            <Button
-              disabled={!!mainIsEditable.length}
-              className={'h-4 min-w-100 ml-auto disabled:cursor-default disabled:text-second-prime'}
-              title={'Создать'}
-              onClick={submitQuestions}
-            />
-          )}
+          {submitBtn}
         </div>
         {themeNumber.test !== 0 && (
           <div className={'flex flex-col gap-2'}>

@@ -43,4 +43,8 @@
   .input-error {
     @apply border-second-prime placeholder-second-prime-light focus:ring-1
   }
+
+  .select-default {
+    @apply text-main-dark
+  }
 }

@@ -15,29 +15,28 @@ import {
 import { questionsThunk } from '@/src/store/question'
 import { getQuestionTopic } from '@/src/api/endpoints'
 import { wrapper } from '@/src/store'
-import { useRouter } from 'next/router'
 
 const Test: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
 > = () => {
   const { user: userData, loading: userLoading } = useAppSelector(userStore)
   const {
-    list: questionData,
+    data: questionData,
     loading: questionLoading,
   } = useAppSelector(questionStore)
-  const { query } = useRouter()
   const showBtnLogin = !userData?.username && !userLoading
+  console.log('questionData ', questionData)
 
   if (userLoading || questionLoading) {
     return <Loader weight={'w-7'} height={'h-7'} center />
-  } else if (!questionData?.length && !questionLoading) {
+  } else if (!questionData?.questions?.length && !questionLoading) {
     return (
       <NotFoundTest showBtnLogin={showBtnLogin} />
     )
   }
 
   return (userData && questionData) && (
-    <TestModule questions={questionData} topicId={query?.id as string ?? '0'} />
+    <TestModule {...questionData} />
   )
 }
 

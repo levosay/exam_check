@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { questionsThunk } from '@/src/store/question/questionThunk'
-import { IQuestions } from '@/src/api/models/questions'
+import { GetQuestionsRequest } from '@/src/api/endpoints'
 
 interface ThemeInitialState {
-  list: IQuestions[] | null,
+  data: GetQuestionsRequest | null,
   loading: boolean
 }
 
 const initialState: ThemeInitialState = {
-  list: null,
+  data: null,
   loading: true,
 }
 
@@ -24,7 +24,7 @@ export const questionSlice = createSlice({
         })
       .addCase(questionsThunk.fulfilled,
         (state, action) => {
-          state.list = action.payload
+          state.data = action.payload
           state.loading = false
         })
   },

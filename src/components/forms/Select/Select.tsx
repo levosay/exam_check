@@ -30,27 +30,28 @@ export const Select: FunctionComponent<
           {labelMessage}
         </label>
       }
-        <Controller
-          name={hookFormProps.inputFormName}
-          control={control}
-          defaultValue={selectedOption?.value ?? ''}
-          render={({ field: { ref, value, onChange } }) => (
-            <ReactSelect
-              className={clsx('select-default w-300', {
-                'select-error': fieldIsError,
-              })}
-              placeholder={placeholder ?? 'Выбрать'}
-              ref={ref}
-              options={options}
-              onChange={(opt) => {
-                const options = opt as SelectOption
-                return onChange(options.value)
-              }}
-              isSearchable={false}
-              value={options?.find((opt) => opt.value === value)}
-            />
-          )}
-        />
+      <Controller
+        name={hookFormProps.inputFormName}
+        control={control}
+        defaultValue={selectedOption?.value ?? ''}
+        render={({ field: { ref, value, onChange } }) => (
+          <ReactSelect
+            placeholder={<p
+              className={'text-second-prime'}>{placeholder ?? 'Выбрать'}</p>}
+            className={clsx('select-default w-300', {
+              'select-error': fieldIsError,
+            })}
+            ref={ref}
+            options={options}
+            onChange={(opt) => {
+              const options = opt as SelectOption
+              return onChange(options.value)
+            }}
+            isSearchable={false}
+            value={options?.find((opt) => opt.value === value)}
+          />
+        )}
+      />
 
     </div>
   )

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo, useState } from 'react'
-import { ITestModuleProps, TimeState } from './TestModule.d'
+import { TestModuleProps, TimeState } from './TestModule.d'
 import { QuestionTypes } from 'api/models/questions'
 import {
   Button,
@@ -24,8 +24,8 @@ const initResultPoints = {
 }
 
 export const TestModule: FunctionComponent<
-  ITestModuleProps
-> = ({ topicId, questions }): JSX.Element => {
+  TestModuleProps
+> = ({ questions, topic }): JSX.Element => {
   const { toHomePath } = useBlackRout()
   const [questionData, setQuestionData] = useState<IQuestionData>({})
   const [resultPoints, setResultPoints] = useState(initResultPoints)
@@ -72,7 +72,7 @@ export const TestModule: FunctionComponent<
   const sendQuestion = () => {
     setLoaded(true)
     postAnswers({
-      topicId,
+      topicId: `${topic.test}`,
       questionData,
       time: `${time.hours}ч:${time.min}м:${time.sec}с`,
     })
@@ -97,6 +97,10 @@ export const TestModule: FunctionComponent<
 
   return (
     <Container>
+      <div className={'flex flex-col items-center border-b mb-2 pb-1'}>
+        <h1 className={'uppercase text-second-prime'}>{topic.title}</h1>
+        <p className={'mt-1'}>{topic.description}</p>
+      </div>
       <Form onSubmit={submit} autoSubmit>
         <div className={'flex max-md:flex-col items-start gap-7'}>
           <div

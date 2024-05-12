@@ -1,8 +1,5 @@
-import { IQuestions } from 'api/models/questions'
+import { GetQuestionsRequest } from '@/src/api/endpoints'
 
-export interface ITestModuleProps {
-  topicId: string
-  questions: IQuestions[]
-}
+export type TestModuleProps = GetQuestionsRequest
 
 export type TimeState = Record<'hours' | 'min' | 'sec', number>
