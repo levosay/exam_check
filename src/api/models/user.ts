@@ -19,6 +19,7 @@ export interface IExamItem {
   date: string
   points: number
   topic?: IExamTopic
+  time?: string
 }
 
 export interface IUser {

@@ -74,7 +74,7 @@ export const TestModule: FunctionComponent<
     postAnswers({
       topicId,
       questionData,
-      time: `часов: ${time.hours} | минут: ${time.min} | сукунд: ${time.sec}`,
+      time: `${time.hours}ч:${time.min}м:${time.sec}с`,
     })
       .then(data => {
         setResultPoints({

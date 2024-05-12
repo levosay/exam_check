@@ -6,6 +6,7 @@ import { useScrollBlock } from 'hooks'
 
 const customStyles = {
   content: {
+    minWidth: '50%',
     borderRadius: '20px',
     padding: '24px',
     margin: '16px',

@@ -1,7 +1,7 @@
 import { IQuestions } from 'api/models/questions'
 
 export interface ITestModuleProps {
-  topicId: number
+  topicId: string
   questions: IQuestions[]
 }
 

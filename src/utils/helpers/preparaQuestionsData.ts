@@ -11,7 +11,7 @@ export interface IQuestionData {
 }
 
 export interface IQuestionBody {
-  topicId: number
+  topicId: string
   questionData: IQuestionData
   time: string
 }

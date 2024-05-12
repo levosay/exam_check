@@ -15,15 +15,17 @@ import {
 import { questionsThunk } from '@/src/store/question'
 import { getQuestionTopic } from '@/src/api/endpoints'
 import { wrapper } from '@/src/store'
+import { useRouter } from 'next/router'
 
 const Test: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ id }) => {
+> = () => {
   const { user: userData, loading: userLoading } = useAppSelector(userStore)
   const {
     list: questionData,
     loading: questionLoading,
   } = useAppSelector(questionStore)
+  const { query } = useRouter()
   const showBtnLogin = !userData?.username && !userLoading
 
   if (userLoading || questionLoading) {
@@ -35,7 +37,7 @@ const Test: NextPage<
   }
 
   return (userData && questionData) && (
-    <TestModule questions={questionData} topicId={id} />
+    <TestModule questions={questionData} topicId={query?.id as string ?? '0'} />
   )
 }
 
@@ -59,9 +61,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
       try {
         await dispatch(questionsThunk(id))
         return {
-          props: {
-            id,
-          },
+          props: {},
         }
       } catch (e) {
         return {

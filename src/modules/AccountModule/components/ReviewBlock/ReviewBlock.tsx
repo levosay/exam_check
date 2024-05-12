@@ -1,13 +1,15 @@
 import { FunctionComponent, useState } from 'react'
 import { TReviewBlockProps } from './ReviewBlock.d'
 import { ReviewItem } from './components'
-import { Icon } from 'components'
+import { Button, Icon } from 'components'
 import clsx from 'clsx'
+import { useBlackRout } from '@/src/hooks'
 
 export const ReviewBlock: FunctionComponent<
   TReviewBlockProps
-> = ({ review, points, date, topic }): JSX.Element => {
+> = ({ review, points, date, topic, time }): JSX.Element => {
   const [open, setOpen] = useState(false)
+  const { toCustomRoute } = useBlackRout()
 
   const examsJSX = review.map((item) => (
     <ReviewItem key={item._id} {...item} />
@@ -25,6 +27,16 @@ export const ReviewBlock: FunctionComponent<
             'text-prim': points >= 40,
           })}>{points}</span></p>
         <p>Дата сдачи: {date}</p>
+        {time && <p>Время прохождения: {time}</p>}
+        {topic && (
+          <Button
+            className={'h-4 min-w-100 hover:text-white mt-1 ml-auto'}
+            title={'Пройти еще раз'}
+            onClick={() => {
+              toCustomRoute(`/test/${topic?.test}`)
+            }}
+          />
+        )}
       </div>
       {open && (
         <div
